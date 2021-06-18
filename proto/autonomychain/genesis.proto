@@ -1,0 +1,12 @@
+syntax = "proto3";
+package AutonomyNetwork.autonomychain.autonomychain;
+
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/autonomychain/types";
+
+// GenesisState defines the autonomychain module's genesis state.
+message GenesisState {
+    // this line is used by starport scaffolding # genesis/proto/state
+    // this line is used by starport scaffolding # ibc/genesis/proto
+}
