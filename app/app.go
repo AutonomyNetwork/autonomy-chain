@@ -90,7 +90,7 @@ import (
 	autonomychaintypes "github.com/AutonomyNetwork/autonomy-chain/x/autonomychain/types"
 )
 
-const Name = "autonomy-chain"
+const Name = "autonomy"
 
 // this line is used by starport scaffolding # stargate/wasm/app/enabledProposals
 
