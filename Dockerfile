@@ -1,7 +1,4 @@
-# Simple usage with a mounted data directory:
-# > docker build -t gaia .
-# > docker run -it -p 46657:46657 -p 46656:46656 -v ~/.gaiad:/gaia/.gaiad -v ~/.gaiacli:/gaia/.gaiacli gaia gaiad init
-# > docker run -it -p 46657:46657 -p 46656:46656 -v ~/.gaiad:/gaia/.gaiad -v ~/.gaiacli:/gaia/.gaiacli gaia gaiad start
+# > docker build -t autonomy .
 FROM golang:1.16-alpine AS build-env
 
 ENV PACKAGES curl make git libc-dev bash gcc linux-headers eudev-dev python3
@@ -21,7 +18,7 @@ ENV AUTONOMY /autonomy
 
 RUN apk add --update ca-certificates
 
-RUN addgroup gaia && \
+RUN addgroup autonomy && \
     adduser -S -G autonomy autonomy -h "$AUTONOMY"
 
 USER autonomy

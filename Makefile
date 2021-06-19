@@ -21,7 +21,7 @@ install: mod-vendor
 go-lint:
 	@golangci-lint run --fix
 
-mod-vendor: tools
+mod-vendor:
 	@go mod vendor
 
 test:
