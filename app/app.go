@@ -84,13 +84,9 @@ import (
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 	tmjson "github.com/tendermint/tendermint/libs/json"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
-	// this line is used by starport scaffolding # stargate/app/moduleImport
-	"github.com/AutonomyNetwork/autonomy-chain/x/autonomychain"
-	autonomychainkeeper "github.com/AutonomyNetwork/autonomy-chain/x/autonomychain/keeper"
-	autonomychaintypes "github.com/AutonomyNetwork/autonomy-chain/x/autonomychain/types"
-)
+	)
 
-const Name = "autonomy-chain"
+const Name = "autonomy"
 
 // this line is used by starport scaffolding # stargate/wasm/app/enabledProposals
 
@@ -134,7 +130,7 @@ var (
 		transfer.AppModuleBasic{},
 		vesting.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
-		autonomychain.AppModuleBasic{},
+
 	)
 
 	// module account permissions
@@ -202,7 +198,7 @@ type App struct {
 
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
-	AutonomychainKeeper autonomychainkeeper.Keeper
+
 
 	// the module manager
 	mm *module.Manager
@@ -232,7 +228,7 @@ func New(
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
-		autonomychaintypes.StoreKey,
+
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -325,12 +321,7 @@ func New(
 
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
-	app.AutonomychainKeeper = *autonomychainkeeper.NewKeeper(
-		appCodec,
-		keys[autonomychaintypes.StoreKey],
-		keys[autonomychaintypes.MemStoreKey],
-	)
-	autonomychainModule := autonomychain.NewAppModule(appCodec, app.AutonomychainKeeper)
+
 
 	app.GovKeeper = govkeeper.NewKeeper(
 		appCodec, keys[govtypes.StoreKey], app.GetSubspace(govtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
@@ -373,7 +364,6 @@ func New(
 		params.NewAppModule(app.ParamsKeeper),
 		transferModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
-		autonomychainModule,
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -407,7 +397,7 @@ func New(
 		evidencetypes.ModuleName,
 		ibctransfertypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
-		autonomychaintypes.ModuleName,
+
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
@@ -595,7 +585,6 @@ func initParamsKeeper(appCodec codec.BinaryMarshaler, legacyAmino *codec.LegacyA
 	paramsKeeper.Subspace(ibctransfertypes.ModuleName)
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
-	paramsKeeper.Subspace(autonomychaintypes.ModuleName)
 
 	return paramsKeeper
 }

@@ -29,11 +29,11 @@ jobs:
       - name: Compile
         run: |
           go mod download
-          cd cmd/autonomychaind
+          cd cmd/autonomy
           go build .
 
       - uses: actions/upload-artifact@v2
         with:
-          name: autonomychaind ${{ matrix.targetos }} ${{ matrix.arch }}
-          path: cmd/autonomychaind/autonomychaind
+          name: autonomy ${{ matrix.targetos }} ${{ matrix.arch }}
+          path: cmd/autonomy/autonomy
 
