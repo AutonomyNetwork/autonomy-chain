@@ -3,6 +3,7 @@ module github.com/AutonomyNetwork/autonomy-chain
 go 1.16
 
 require (
+	github.com/althea-net/cosmos-gravity-bridge/module v0.0.0-20210517233717-bca90b08f42f
 	github.com/cosmos/cosmos-sdk v0.42.5
 	github.com/gogo/protobuf v1.3.3 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
