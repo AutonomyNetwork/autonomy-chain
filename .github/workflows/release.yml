@@ -1,8 +1,17 @@
-- id: bump
-  uses: zwaldowski/match-label-action@v1
-  with:
-    allowed: major,minor,patch
-- uses: zwaldowski/semver-release-action@v1
-  with:
-    bump: ${{ steps.bump.outputs.match }}
-    github_token: ${{ secrets.GITHUB_TOKEN }}
+name: Release
+on:
+  push:
+    branches:
+      - main
+      - eth-bridge
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: go-semantic-release/action@v1
+        with:
+            github-token: ${{ secrets.GITHUB_TOKEN }
+          
