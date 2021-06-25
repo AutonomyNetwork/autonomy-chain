@@ -1,19 +1,8 @@
-name: Release
-on:
-  push:
-    branches:
-      - main
-      - eth-bridge
-
-jobs:
-  release:
-    name: release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - uses: bahmutov/npm-install@v1
-      - run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+- id: bump
+  uses: zwaldowski/match-label-action@v1
+  with:
+    allowed: major,minor,patch
+- uses: zwaldowski/semver-release-action@v1
+  with:
+    bump: ${{ steps.bump.outputs.match }}
+    github_token: ${{ secrets.GITHUB_TOKEN }}
