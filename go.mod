@@ -5,7 +5,6 @@ go 1.16
 require (
 	github.com/althea-net/cosmos-gravity-bridge/module v0.0.0-20210623144132-d71cc5bf08f4
 	github.com/cosmos/cosmos-sdk v0.42.5
-	github.com/ethereum/go-ethereum v1.10.3 // indirect
 	github.com/gogo/protobuf v1.3.3 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0 // indirect
@@ -21,4 +20,6 @@ require (
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
 
+
 replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
+replace github.com/althea-net/cosmos-gravity-bridge/module => ../../althea-net/cosmos-gravity-bridge/module
