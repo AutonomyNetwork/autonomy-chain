@@ -3,9 +3,7 @@ on:
   push:
     branches:
       - main
-      #- next
-      #- beta
-      #- "*.x" # maintenance releases branches
+      - eth-bridge
 
 jobs:
   release:
