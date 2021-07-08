@@ -1,0 +1,18 @@
+syntax = "proto3";
+package AutonomyNetwork.autonomychain.issuance.v1;
+
+
+import "gogoproto/gogo.proto";
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types";
+
+message Token {
+  string creator = 1;
+  uint64 id = 2;
+  string denom = 3;
+  uint64 initial_supply = 4;
+  uint64 holders = 5;
+}
+
+message TokenDenoms {
+  repeated  string denoms = 1;
+}

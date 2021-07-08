@@ -2,7 +2,7 @@ PACKAGES := $(shell go list ./...)
 VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
 COMMIT := $(shell git log -1 --format='%H')
 TENDERMINT_VERSION := $(shell go list -m github.com/tendermint/tendermint | sed 's:.* ::')
-
+MODVENDOR=modvendor
 BUILD_TAGS := $(strip netgo,ledger)
 LD_FLAGS := -s -w \
     -X github.com/cosmos/cosmos-sdk/version.Name=Autonomy \
@@ -26,6 +26,18 @@ mod-vendor:
 
 test:
 	@go test -mod=readonly -v -cover ${PACKAGES}
+
+proto-gen:
+	@scripts/protocgen.sh
+
+proto-lint:
+	@find proto -name *.proto -exec clang-format-12 -i {} \;
+
+modvendor:
+	@echo "vendoring non-go files..."
+	$(MODVENDOR) -copy="**/*.proto" -include=\
+github.com/cosmos/cosmos-sdk/proto,\
+github.com/cosmos/cosmos-sdk/third_party/proto
 
 tools:
 	@go install github.com/bufbuild/buf/cmd/buf@v0.37.0

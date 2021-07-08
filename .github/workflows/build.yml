@@ -4,7 +4,7 @@ name: autonomychain
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 # This workflow makes x86_64 binaries for mac, windows, and linux.
 
@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: [amd64, arm64]
-        targetos: [windows, darwin, linux]
+        arch: [ amd64, arm64 ]
+        targetos: [ windows, darwin, linux ]
     name: autonomychain ${{ matrix.arch }} for ${{ matrix.targetos }}
     steps:
       - uses: actions/checkout@v2

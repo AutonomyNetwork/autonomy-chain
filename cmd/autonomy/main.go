@@ -2,10 +2,11 @@ package main
 
 import (
 	"os"
-
+	
+	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
+	
 	"github.com/AutonomyNetwork/autonomy-chain/app"
 	"github.com/AutonomyNetwork/autonomy-chain/cmd/autonomy/cmd"
-	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 )
 
 func main() {
@@ -14,3 +15,5 @@ func main() {
 		os.Exit(1)
 	}
 }
+
+
