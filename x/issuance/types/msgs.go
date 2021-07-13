@@ -6,12 +6,14 @@ import (
 
 var _ sdk.Msg = &MsgIssueToken{}
 
-func NewMsgIssueToken(creator, denom string, decimal uint64, initial_supply uint64) *MsgIssueToken {
+func NewMsgIssueToken(creator, denom string, decimal uint64, initial_supply uint64, display, description string) *MsgIssueToken {
 	return &MsgIssueToken{
 		Creator:       creator,
 		Denom:         denom,
 		Decimals:      decimal,
 		InitialSupply: initial_supply,
+		Display: display,
+		Description: description,
 	}
 }
 

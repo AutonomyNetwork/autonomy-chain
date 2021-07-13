@@ -2,6 +2,7 @@ package types
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/x/bank/types"
 )
 
 type BankKeeper interface {
@@ -10,4 +11,6 @@ type BankKeeper interface {
 	MintCoins(ctx sdk.Context, name string, amt sdk.Coins) error
 	BurnCoins(ctx sdk.Context, name string, amt sdk.Coins) error
 	GetAllBalances(ctx sdk.Context, addr sdk.AccAddress) sdk.Coins
+	SetDenomMetaData(ctx sdk.Context, denomMetadata types.Metadata)
+	GetDenomMetaData(ctx sdk.Context, denom string) (types.Metadata, bool)
 }

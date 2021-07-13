@@ -19,6 +19,8 @@ message MsgIssueToken {
   string denom = 2;
   uint64 decimals = 3;
   uint64 initial_supply = 4;
+  string display = 5;
+  string description = 6;
 }
 
 message MsgIssueTokenResponse {

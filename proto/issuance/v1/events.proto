@@ -13,4 +13,6 @@ message EventIssueToken{
   uint64  decimals = 2;
   uint64  initial_supply = 3;
   string denom = 4;
+  string display = 5;
+  string description = 6;
 }

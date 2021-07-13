@@ -11,6 +11,8 @@ message Token {
   string denom = 3;
   uint64 initial_supply = 4;
   uint64 holders = 5;
+  string display = 6;
+  string description = 7;
 }
 
 message TokenDenoms {

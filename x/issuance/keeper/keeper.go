@@ -15,7 +15,7 @@ type (
 	Keeper struct {
 		cdc        codec.Marshaler
 		storeKey   sdk.StoreKey
-		bankKeeper types.BankKeeper
+		BankKeeper types.BankKeeper
 	}
 )
 
@@ -27,7 +27,7 @@ func NewKeeper(
 	return Keeper{
 		cdc:        cdc,
 		storeKey:   storeKey,
-		bankKeeper: bankKeeper,
+		BankKeeper: bankKeeper,
 	}
 }
 

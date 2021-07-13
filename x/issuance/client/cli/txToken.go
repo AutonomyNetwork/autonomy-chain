@@ -14,9 +14,9 @@ import (
 
 func CmdIssueToken() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "issue-token [denom] [decimals] [initial-supply] ",
+		Use:   "issue-token [denom] [decimals] [initial-supply] [display] [token-discription]",
 		Short: "Issue a new token",
-		Args:  cobra.ExactArgs(3),
+		Args:  cobra.ExactArgs(5),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			argsDenom, err := cast.ToStringE(args[0])
 			if err != nil {
@@ -37,7 +37,17 @@ func CmdIssueToken() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgIssueToken(clientCtx.GetFromAddress().String(), argsDenom, argsDecimals, argsInitial_Supply)
+			argsDisplay, err := cast.ToStringE(args[3])
+			if err != nil {
+				return err
+			}
+
+			argsToken_Discription, err := cast.ToStringE(args[4])
+			if err != nil {
+				return err
+			}
+
+			msg := types.NewMsgIssueToken(clientCtx.GetFromAddress().String(), argsDenom, argsDecimals, argsInitial_Supply, argsDisplay, argsToken_Discription)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}

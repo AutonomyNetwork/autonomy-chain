@@ -2,8 +2,11 @@ package keeper
 
 import (
 	"context"
+	"fmt"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
 
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
 )
@@ -29,6 +32,8 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 		Denom:         t.Denom,
 		InitialSupply: t.InitialSupply,
 		Holders:       0,
+		Display: t.Display,
+		Description: t.Description,
 	}
 
 	if err := k.MintToken(ctx, t.Creator, sdk.NewCoin(t.Denom, sdk.NewIntFromUint64(t.InitialSupply))); err != nil {
@@ -36,6 +41,19 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 	}
 	k.SetToken(ctx, token)
 	k.SetTokenCount(ctx, count+1)
+
+	k.BankKeeper.SetDenomMetaData(ctx, bank.Metadata{
+		Description: t.Description,
+		DenomUnits: []*bank.DenomUnit{
+			{Denom: t.Display, Exponent: uint32(t.Decimals), Aliases: []string{}},
+		},
+		Base: t.Denom,
+		Display: t.Display,
+	})
+
+	metadata, _ := k.BankKeeper.GetDenomMetaData(ctx, t.Denom)
+
+	fmt.Println("Denom metadata: ", metadata)
 
 	ctx.EventManager().EmitTypedEvents(
 		&types.EventIssueToken{
