@@ -17,8 +17,9 @@ service Msg {
 message MsgIssueToken {
   string creator = 1;
   string denom = 2;
-  uint64 decimals = 3;
-  uint64 initial_supply = 4;
+  string display_name = 3;
+  uint64 decimals = 4;
+  uint64 initial_supply = 5;
 }
 
 message MsgIssueTokenResponse {

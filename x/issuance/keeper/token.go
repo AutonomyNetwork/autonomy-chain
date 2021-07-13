@@ -7,6 +7,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
+	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
 )
 
 // GetTokenCount get the total number of token
@@ -114,4 +115,13 @@ func (k Keeper) MintToken(ctx sdk.Context, address string, amount sdk.Coin) erro
 		return sdkerrors.Wrap(err, "transfer tokens")
 	}
 	return nil
+}
+
+
+func (k Keeper) SetDenomMetaData(ctx sdk.Context, metadata bank.Metadata) {
+	k.bankKeeper.SetDenomMetaData(ctx, metadata)
+}
+
+func (k Keeper) GetDenomMetaData(ctx sdk.Context, denom string) bank.Metadata{
+	return k.bankKeeper.GetDenomMetaData(ctx,denom)
 }

@@ -2,9 +2,11 @@ package keeper
 
 import (
 	"context"
-
+	"fmt"
+	
 	sdk "github.com/cosmos/cosmos-sdk/types"
-
+	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
+	
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
 )
 
@@ -27,6 +29,7 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 		Creator:       t.Creator,
 		Id:            count,
 		Denom:         t.Denom,
+		DisplayName: t.DisplayName,
 		InitialSupply: t.InitialSupply,
 		Holders:       0,
 	}
@@ -36,6 +39,18 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 	}
 	k.SetToken(ctx, token)
 	k.SetTokenCount(ctx, count+1)
+	
+	metaData:= bank.Metadata{
+		Description: fmt.Sprintf("The deatilas about %s token", t.Denom),
+		DenomUnits:  []*bank.DenomUnit{
+			{Denom: t.Denom, Exponent: 0},
+			{Denom: t.DisplayName, Exponent: uint32(t.Decimals)},
+		},
+		Base:        t.Denom,
+		Display:     t.DisplayName,
+	}
+	
+	k.SetDenomMetaData(ctx, metaData)
 
 	ctx.EventManager().EmitTypedEvents(
 		&types.EventIssueToken{

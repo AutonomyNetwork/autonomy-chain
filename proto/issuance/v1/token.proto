@@ -9,8 +9,9 @@ message Token {
   string creator = 1;
   uint64 id = 2;
   string denom = 3;
-  uint64 initial_supply = 4;
-  uint64 holders = 5;
+  string display_name = 4;
+  uint64 initial_supply = 5;
+  uint64 holders = 6;
 }
 
 message TokenDenoms {
