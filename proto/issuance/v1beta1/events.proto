@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package AutonomyNetwork.autonomychain.issuance.v1;
+package issuance.v1beta1;
 option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types";
 
 
