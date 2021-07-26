@@ -37,7 +37,7 @@ func (k Keeper) TokenAll(c context.Context, req *types.QueryAllTokenRequest) (*t
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllTokenResponse{Token: tokens, Pagination: pageRes}, nil
+	return &types.QueryAllTokenResponse{Tokens: tokens, Pagination: pageRes}, nil
 }
 
 func (k Keeper) Token(c context.Context, req *types.QueryGetTokenRequest) (*types.QueryGetTokenResponse, error) {

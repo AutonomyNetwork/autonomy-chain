@@ -1,8 +1,8 @@
 syntax = "proto3";
-package AutonomyNetwork.autonomychain.issuance.v1;
+package issuance.v1beta1;
 
 // this line is used by starport scaffolding # proto/tx/import
-import "issuance/v1/token.proto";
+import "issuance/v1beta1/token.proto";
 
 option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types";
 

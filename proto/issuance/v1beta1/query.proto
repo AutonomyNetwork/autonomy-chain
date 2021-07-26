@@ -1,10 +1,10 @@
 syntax = "proto3";
-package AutonomyNetwork.autonomychain.issuance.v1;
+package issuance.v1beta1;
 
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 // this line is used by starport scaffolding # 1
-import "issuance/v1/token.proto";
+import "issuance/v1beta1/token.proto";
 
 option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types";
 
@@ -30,7 +30,7 @@ message QueryGetTokenRequest {
 }
 
 message QueryGetTokenResponse {
-  Token Token = 1;
+  Token token = 1;
 }
 
 message QueryAllTokenRequest {
@@ -38,6 +38,6 @@ message QueryAllTokenRequest {
 }
 
 message QueryAllTokenResponse {
-  repeated Token Token = 1;
+  repeated Token tokens = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
