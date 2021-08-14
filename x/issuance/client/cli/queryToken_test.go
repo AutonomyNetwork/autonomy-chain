@@ -3,7 +3,7 @@ package cli_test
 import (
 	"fmt"
 	"testing"
-
+	
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	clitestutil "github.com/cosmos/cosmos-sdk/testutil/cli"
 	"github.com/stretchr/testify/assert"
@@ -11,7 +11,7 @@ import (
 	tmcli "github.com/tendermint/tendermint/libs/cli"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-
+	
 	"github.com/AutonomyNetwork/autonomy-chain/testutil/network"
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/client/cli"
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
@@ -22,7 +22,7 @@ func networkWithTokenObjects(t *testing.T, n int) (*network.Network, []*types.To
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
 	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
-
+	
 	for i := 0; i < n; i++ {
 		state.TokenList = append(state.TokenList, &types.Token{Creator: "ANY", Id: uint64(i)})
 	}
@@ -34,7 +34,7 @@ func networkWithTokenObjects(t *testing.T, n int) (*network.Network, []*types.To
 
 func TestShowToken(t *testing.T) {
 	net, objs := networkWithTokenObjects(t, 2)
-
+	
 	ctx := net.Validators[0].ClientCtx
 	common := []string{
 		fmt.Sprintf("--%s=json", tmcli.OutputFlag),
@@ -81,7 +81,7 @@ func TestShowToken(t *testing.T) {
 
 func TestListToken(t *testing.T) {
 	net, objs := networkWithTokenObjects(t, 5)
-
+	
 	ctx := net.Validators[0].ClientCtx
 	request := func(next []byte, offset, limit uint64, total bool) []string {
 		args := []string{

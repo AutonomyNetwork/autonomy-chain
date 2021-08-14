@@ -18,13 +18,13 @@ func DefaultGenesis() *GenesisState {
 // failure.
 func (gs GenesisState) Validate() error {
 	tokenIdMap := make(map[uint64]bool)
-
+	
 	for _, elem := range gs.TokenList {
 		if _, ok := tokenIdMap[elem.Id]; ok {
 			return fmt.Errorf("duplicated id for token")
 		}
 		tokenIdMap[elem.Id] = true
 	}
-
+	
 	return nil
 }
