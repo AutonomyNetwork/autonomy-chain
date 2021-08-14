@@ -1,0 +1,43 @@
+syntax = "proto3";
+package issuance.v1beta1;
+
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+// this line is used by starport scaffolding # 1
+import "issuance/v1beta1/token.proto";
+
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // this line is used by starport scaffolding # 2
+
+  // Queries a token by id.
+  rpc Token(QueryGetTokenRequest) returns (QueryGetTokenResponse) {
+    option (google.api.http).get = "/AutonomyNetwork/autonomychain/issuance/token/{id}";
+  }
+
+  // Queries a list of token items.
+  rpc TokenAll(QueryAllTokenRequest) returns (QueryAllTokenResponse) {
+    option (google.api.http).get = "/AutonomyNetwork/autonomychain/issuance/tokens";
+  }
+
+}
+
+// this line is used by starport scaffolding # 3
+message QueryGetTokenRequest {
+  uint64 id = 1;
+}
+
+message QueryGetTokenResponse {
+  Token token = 1;
+}
+
+message QueryAllTokenRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllTokenResponse {
+  repeated Token tokens = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}

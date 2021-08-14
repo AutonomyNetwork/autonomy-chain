@@ -2,14 +2,14 @@ package simapp
 
 import (
 	"time"
-
+	
 	"github.com/cosmos/cosmos-sdk/simapp"
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/log"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 	tmdb "github.com/tendermint/tm-db"
-
+	
 	"github.com/AutonomyNetwork/autonomy-chain/app"
 )
 
@@ -17,9 +17,9 @@ import (
 func New(dir string) *app.App {
 	db := tmdb.NewMemDB()
 	logger := log.NewNopLogger()
-
+	
 	encoding := app.MakeEncodingConfig()
-
+	
 	a := app.New(logger, db, nil, true, map[int64]bool{}, dir, 0, encoding,
 		// this line is used by starport scaffolding # stargate/testutil/appArgument
 		simapp.EmptyAppOptions{})

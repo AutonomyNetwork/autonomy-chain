@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package issuance.v1beta1;
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types";
+
+
+
+message EventModule{
+  string name = 1;
+}
+message EventIssueToken{
+  string  address = 1;
+  uint64  decimals = 2;
+  uint64  initial_supply = 3;
+  string denom = 4;
+}

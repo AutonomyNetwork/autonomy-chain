@@ -1,0 +1,14 @@
+syntax = "proto3";
+package issuance.v1beta1;
+
+// this line is used by starport scaffolding # genesis/proto/import
+import "issuance/v1beta1/token.proto";
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types";
+
+// GenesisState defines the issuance module's genesis state.
+message GenesisState {
+  // this line is used by starport scaffolding # genesis/proto/state
+  repeated Token tokenList = 1; // this line is used by starport scaffolding # genesis/proto/stateField
+  uint64 tokenCount = 2; // this line is used by starport scaffolding # genesis/proto/stateField
+  // this line is used by starport scaffolding # ibc/genesis/proto
+}

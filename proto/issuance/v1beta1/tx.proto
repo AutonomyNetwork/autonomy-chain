@@ -1,0 +1,27 @@
+syntax = "proto3";
+package issuance.v1beta1;
+
+// this line is used by starport scaffolding # proto/tx/import
+import "issuance/v1beta1/token.proto";
+
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types";
+
+// Msg defines the Msg service.
+service Msg {
+  // this line is used by starport scaffolding # proto/tx/rpc
+  rpc IssueToken(MsgIssueToken) returns (MsgIssueTokenResponse);
+}
+
+
+// this line is used by starport scaffolding # proto/tx/message
+message MsgIssueToken {
+  string creator = 1;
+  string denom = 2;
+  string display_name = 3;
+  uint64 decimals = 4;
+  uint64 initial_supply = 5;
+}
+
+message MsgIssueTokenResponse {
+  uint64 id = 1;
+}

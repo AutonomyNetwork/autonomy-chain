@@ -4,3 +4,6 @@ secret.yml
 .idea/*
 docs/node_modules
 vendor/
+keys.json
+buf.lock
+testnetkeys.txt
