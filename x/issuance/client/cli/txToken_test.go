@@ -3,13 +3,13 @@ package cli_test
 import (
 	"fmt"
 	"testing"
-
+	
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	clitestutil "github.com/cosmos/cosmos-sdk/testutil/cli"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
-
+	
 	"github.com/AutonomyNetwork/autonomy-chain/testutil/network"
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/client/cli"
 )
@@ -18,7 +18,7 @@ func TestCreateToken(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
-
+	
 	fields := []string{"xyz", "xyz", "111"}
 	for _, tc := range []struct {
 		desc string
@@ -56,10 +56,10 @@ func TestCreateToken(t *testing.T) {
 
 func TestUpdateToken(t *testing.T) {
 	net := network.New(t)
-
+	
 	val := net.Validators[0]
 	ctx := val.ClientCtx
-
+	
 	fields := []string{"xyz", "xyz", "111"}
 	common := []string{
 		fmt.Sprintf("--%s=%s", flags.FlagFrom, val.Address.String()),
@@ -72,7 +72,7 @@ func TestUpdateToken(t *testing.T) {
 	args = append(args, common...)
 	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateToken(), args)
 	require.NoError(t, err)
-
+	
 	for _, tc := range []struct {
 		desc string
 		id   string
@@ -112,10 +112,10 @@ func TestUpdateToken(t *testing.T) {
 
 func TestDeleteToken(t *testing.T) {
 	net := network.New(t)
-
+	
 	val := net.Validators[0]
 	ctx := val.ClientCtx
-
+	
 	fields := []string{"xyz", "xyz", "111"}
 	common := []string{
 		fmt.Sprintf("--%s=%s", flags.FlagFrom, val.Address.String()),
@@ -128,7 +128,7 @@ func TestDeleteToken(t *testing.T) {
 	args = append(args, common...)
 	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateToken(), args)
 	require.NoError(t, err)
-
+	
 	for _, tc := range []struct {
 		desc string
 		id   string

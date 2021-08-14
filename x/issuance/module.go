@@ -4,19 +4,19 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-
+	
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
-
+	
 	abci "github.com/tendermint/tendermint/abci/types"
-
+	
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-
+	
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/client/cli"
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/keeper"
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
@@ -99,7 +99,7 @@ func (AppModuleBasic) GetQueryCmd() *cobra.Command {
 // AppModule implements the AppModule interface for the capability module.
 type AppModule struct {
 	AppModuleBasic
-
+	
 	keeper     keeper.Keeper
 	bankKeeper types.BankKeeper
 }
@@ -145,9 +145,9 @@ func (am AppModule) InitGenesis(ctx sdk.Context, cdc codec.JSONMarshaler, gs jso
 	var genState types.GenesisState
 	// Initialize global index to index in genesis state
 	cdc.MustUnmarshalJSON(gs, &genState)
-
+	
 	InitGenesis(ctx, am.keeper, genState)
-
+	
 	return []abci.ValidatorUpdate{}
 }
 

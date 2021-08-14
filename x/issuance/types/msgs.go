@@ -10,7 +10,7 @@ func NewMsgIssueToken(creator, denom, display_name string, decimal uint64, initi
 	return &MsgIssueToken{
 		Creator:       creator,
 		Denom:         denom,
-		DisplayName: display_name,
+		DisplayName:   display_name,
 		Decimals:      decimal,
 		InitialSupply: initial_supply,
 	}

@@ -9,14 +9,14 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgIssueToken{}, "issuance/IsssueToken", nil)
-
+	
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgIssueToken{},
 	)
-
+	
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }
 

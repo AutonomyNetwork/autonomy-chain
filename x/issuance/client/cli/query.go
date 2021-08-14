@@ -2,11 +2,11 @@ package cli
 
 import (
 	"fmt"
-
+	
 	"github.com/spf13/cobra"
-
+	
 	"github.com/cosmos/cosmos-sdk/client"
-
+	
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
 )
 
@@ -19,9 +19,9 @@ func GetQueryCmd(queryRoute string) *cobra.Command {
 		SuggestionsMinimumDistance: 2,
 		RunE:                       client.ValidateCmd,
 	}
-
+	
 	cmd.AddCommand(CmdListToken())
 	cmd.AddCommand(CmdShowToken())
-
+	
 	return cmd
 }

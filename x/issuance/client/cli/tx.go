@@ -3,11 +3,11 @@ package cli
 import (
 	"fmt"
 	"time"
-
+	
 	"github.com/spf13/cobra"
-
+	
 	"github.com/cosmos/cosmos-sdk/client"
-
+	
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
 )
 
@@ -28,8 +28,8 @@ func GetTxCmd() *cobra.Command {
 		SuggestionsMinimumDistance: 2,
 		RunE:                       client.ValidateCmd,
 	}
-
+	
 	cmd.AddCommand(CmdIssueToken())
-
+	
 	return cmd
 }
