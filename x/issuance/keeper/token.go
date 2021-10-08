@@ -48,7 +48,7 @@ func (k Keeper) IssueToken(
 	token.Id = count
 	
 	store := ctx.KVStore(k.storeKey)
-	bytes := k.cdc.MustMarshalBinaryBare(&token)
+	bytes := k.cdc.MustMarshal(&token)
 	store.Set(types.GetTokenKey(token.Id), bytes)
 	
 	// Update token count
@@ -60,15 +60,20 @@ func (k Keeper) IssueToken(
 // SetToken set a specific token in the store
 func (k Keeper) SetToken(ctx sdk.Context, token types.Token) {
 	store := ctx.KVStore(k.storeKey)
-	b := k.cdc.MustMarshalBinaryBare(&token)
+	
+	b := types.MustMarshalToken(k.cdc, &token)
+	// b := k.cdc.MustMarshal(&token)
 	store.Set(types.GetTokenKey(token.Id), b)
 }
 
 // GetToken returns a token from its id
-func (k Keeper) GetToken(ctx sdk.Context, id uint64) types.Token {
+func (k Keeper) GetToken(ctx sdk.Context, id uint64) (token types.Token) {
 	store := ctx.KVStore(k.storeKey)
-	var token types.Token
-	k.cdc.MustUnmarshalBinaryBare(store.Get(types.GetTokenKey(id)), &token)
+	val := store.Get(types.GetTokenKey(id))
+	if val == nil {
+		return types.Token{}
+	}
+	token = types.MustUnmashalToken(k.cdc, val)
 	return token
 }
 
@@ -93,7 +98,7 @@ func (k Keeper) GetAllToken(ctx sdk.Context) (list []types.Token) {
 	
 	for ; iterator.Valid(); iterator.Next() {
 		var val types.Token
-		k.cdc.MustUnmarshalBinaryBare(iterator.Value(), &val)
+		k.cdc.Unmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}
 	
@@ -122,7 +127,7 @@ func (k Keeper) SetDenomMetaData(ctx sdk.Context, metadata bank.Metadata) {
 	k.bankKeeper.SetDenomMetaData(ctx, metadata)
 }
 
-func (k Keeper) GetDenomMetaData(ctx sdk.Context, denom string) bank.Metadata {
+func (k Keeper) GetDenomMetaData(ctx sdk.Context, denom string) (bank.Metadata, bool) {
 	return k.bankKeeper.GetDenomMetaData(ctx, denom)
 }
 
