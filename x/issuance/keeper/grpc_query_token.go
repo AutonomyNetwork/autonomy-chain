@@ -26,7 +26,8 @@ func (k Keeper) TokenAll(c context.Context, req *types.QueryAllTokenRequest) (*t
 	pageRes, err := query.Paginate(tokenStore, req.Pagination, func(key []byte, value []byte) error {
 		var token types.Token
 		
-		if err := k.cdc.UnmarshalBinaryBare(value, &token); err != nil {
+		token, err := types.UnMarshalToken(k.cdc, value)
+		if err != nil {
 			return err
 		}
 		token.Holders = uint64(len(k.GetDenomHolders(ctx, token.Denom)))

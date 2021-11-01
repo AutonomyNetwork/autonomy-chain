@@ -14,7 +14,7 @@ type BankKeeper interface {
 	GetAllBalances(ctx sdk.Context, addr sdk.AccAddress) sdk.Coins
 	GetAccountsBalances(ctx sdk.Context) []bank.Balance
 	
-	GetDenomMetaData(ctx sdk.Context, denom string) bank.Metadata
+	GetDenomMetaData(ctx sdk.Context, denom string) (bank.Metadata, bool)
 	SetDenomMetaData(ctx sdk.Context, denomMetaData bank.Metadata)
 	IterateAllDenomMetaData(ctx sdk.Context, cb func(bank.Metadata) bool)
 }
