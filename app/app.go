@@ -88,12 +88,18 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/modules/core/keeper"
 	tmjson "github.com/tendermint/tendermint/libs/json"
 	
+	"github.com/gravity-devs/liquidity/x/liquidity"
+	liquiditykeeper "github.com/gravity-devs/liquidity/x/liquidity/keeper"
+	liquiditytypes "github.com/gravity-devs/liquidity/x/liquidity/types"
+	
 	appparams "github.com/AutonomyNetwork/autonomy-chain/app/params"
 	"github.com/AutonomyNetwork/autonomy-chain/docs"
 	
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance"
 	issuanceKeeper "github.com/AutonomyNetwork/autonomy-chain/x/issuance/keeper"
 	issuanceTypes "github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
+	
+	
 )
 
 const Name = "autonomy"
@@ -137,8 +143,11 @@ var (
 		authzmodule.AppModuleBasic{},
 		transfer.AppModuleBasic{},
 		vesting.AppModuleBasic{},
+		liquidity.AppModuleBasic{},
 		
 		issuance.AppModuleBasic{},
+		
+
 	
 	)
 	
@@ -152,6 +161,7 @@ var (
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
 		issuanceTypes.ModuleName:       {authtypes.Minter, authtypes.Burner},
+		liquiditytypes.ModuleName: {authtypes.Minter, authtypes.Burner},
 	}
 )
 
@@ -166,7 +176,7 @@ func init() {
 		panic(err)
 	}
 	
-	DefaultNodeHome = filepath.Join(userHomeDir, "."+Name)
+	DefaultNodeHome = filepath.Join(userHomeDir, ".autonomy")
 }
 
 // App extends an ABCI application, but with most of its parameters exported.
@@ -203,8 +213,8 @@ type App struct {
 	EvidenceKeeper   evidencekeeper.Keeper
 	TransferKeeper   ibctransferkeeper.Keeper
 	FeeGrantKeeper feegrantkeeper.Keeper
+	LiquidityKeeper liquiditykeeper.Keeper
 	
-	// make scoped keepers public for test purposes
 	ScopedIBCKeeper      capabilitykeeper.ScopedKeeper
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 	
@@ -238,7 +248,7 @@ func New(
 		minttypes.StoreKey, distrtypes.StoreKey, slashingtypes.StoreKey,
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey,feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey,
-		issuanceTypes.StoreKey, authzkeeper.StoreKey,
+		issuanceTypes.StoreKey, authzkeeper.StoreKey,liquiditytypes.StoreKey,
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -336,6 +346,11 @@ func New(
 	// If evidence needs to be handled for the app, set routes in router here and seal
 	app.EvidenceKeeper = *evidenceKeeper
 	
+	app.LiquidityKeeper = liquiditykeeper.NewKeeper(
+		appCodec, keys[liquiditytypes.StoreKey], app.GetSubspace(liquiditytypes.ModuleName),
+		app.BankKeeper, app.AccountKeeper, app.DistrKeeper,
+		)
+	
 	app.IssuanceKeeper = issuanceKeeper.NewKeeper(appCodec, keys[issuanceTypes.StoreKey], app.BankKeeper)
 	
 	// Create static IBC router, add transfer route, then set and seal it
@@ -373,6 +388,7 @@ func New(
 		ibc.NewAppModule(app.IBCKeeper),
 		params.NewAppModule(app.ParamsKeeper),
 		authzmodule.NewAppModule(appCodec, app.AuthzKeeper,app.AccountKeeper,app.BankKeeper,app.interfaceRegistry),
+		liquidity.NewAppModule(appCodec, app.LiquidityKeeper, app.AccountKeeper, app.BankKeeper, app.DistrKeeper),
 		transferModule,
 		
 		issuance.NewAppModule(appCodec, app.IssuanceKeeper, app.BankKeeper),
@@ -383,9 +399,9 @@ func New(
 	// NOTE: staking module is required if HistoricalEntries param > 0
 	app.mm.SetOrderBeginBlockers(
 		upgradetypes.ModuleName, capabilitytypes.ModuleName, minttypes.ModuleName, distrtypes.ModuleName, slashingtypes.ModuleName,
-		evidencetypes.ModuleName, stakingtypes.ModuleName, ibchost.ModuleName)
+		evidencetypes.ModuleName, stakingtypes.ModuleName, liquiditytypes.ModuleName, ibchost.ModuleName)
 	
-	app.mm.SetOrderEndBlockers(crisistypes.ModuleName, govtypes.ModuleName, stakingtypes.ModuleName)
+	app.mm.SetOrderEndBlockers(crisistypes.ModuleName, govtypes.ModuleName, stakingtypes.ModuleName, liquiditytypes.ModuleName)
 	
 	// NOTE: The genutils module must occur after staking so that pools are
 	// properly initialized with tokens from genesis accounts.
@@ -409,6 +425,7 @@ func New(
 		ibctransfertypes.ModuleName,
 		issuanceTypes.ModuleName,
 		feegrant.ModuleName,
+		liquiditytypes.ModuleName,
 	)
 	
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
@@ -591,6 +608,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(crisistypes.ModuleName)
 	paramsKeeper.Subspace(ibctransfertypes.ModuleName)
 	paramsKeeper.Subspace(ibchost.ModuleName)
+	paramsKeeper.Subspace(liquiditytypes.ModuleName)
 	
 	return paramsKeeper
 }
