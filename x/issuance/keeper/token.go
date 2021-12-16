@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"strconv"
+	"strings"
 	
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -156,3 +157,28 @@ func (k Keeper) GetDenomHolders(ctx sdk.Context, denom string) []bank.Balance {
 	}
 	return denomHolder
 }
+
+func (k Keeper)GetTokenByDenom(ctx sdk.Context, denom string) types.Token{
+	tokens:= k.GetAllToken(ctx)
+	for _, token := range  tokens{
+		if strings.EqualFold(denom, token.Denom){
+			return token
+		}
+	}
+	return types.Token{}
+}
+
+func (k Keeper)GetTokensByOwner(ctx sdk.Context, addr string) []*types.Token {
+	var ownedTokens []*types.Token
+	
+	tokens:= k.GetAllToken(ctx)
+	for _, token := range tokens{
+		if strings.EqualFold(addr, token.Creator){
+			account := k.GetDenomHolders(ctx,token.Denom)
+			token.Holders  = uint64(len(account))
+			ownedTokens = append(ownedTokens, &token)
+		}
+	}
+	return ownedTokens
+}
+
