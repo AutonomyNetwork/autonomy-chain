@@ -3,6 +3,8 @@ package keeper
 import (
 	"context"
 	
+	"reflect"
+	
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -57,4 +59,40 @@ func (k Keeper) Token(c context.Context, req *types.QueryGetTokenRequest) (*type
 	token := k.GetToken(ctx, req.Id)
 	token.Holders = uint64(len(k.GetDenomHolders(ctx, token.Denom)))
 	return &types.QueryGetTokenResponse{Token: &token}, nil
+}
+
+
+func (k Keeper)TokenByDenom(c context.Context, req *types.QueryTokenByDenomRequest)(*types.QueryGetTokenResponse, error){
+	empty:= &types.QueryTokenByDenomRequest{}
+	if req == nil || *req == *empty{
+		return nil, status.Error(codes.InvalidArgument,"empty request")
+	}
+	
+	ctx:= sdk.UnwrapSDKContext(c)
+	
+	token:=k.GetTokenByDenom(ctx, req.Denom)
+	token.Holders = uint64(len(k.GetDenomHolders(ctx, token.Denom)))
+	if reflect.DeepEqual(token, types.Token{}){
+		return nil, status.Error(codes.NotFound, "requested denom doesn't exist")
+	}
+	
+	return &types.QueryGetTokenResponse{
+		Token: &token,
+	}, nil
+	
+}
+
+func (k Keeper)TokensByOwner(c context.Context, req  *types.QueryTokensByOwnerRequest) (*types.QueryAllTokenResponse, error){
+	empty:= &types.QueryTokensByOwnerRequest{}
+	if req == nil || *req == *empty{
+		return nil, status.Error(codes.InvalidArgument,"empty request")
+	}
+	
+	ctx:= sdk.UnwrapSDKContext(c)
+	
+	tokens:= k.GetTokensByOwner(ctx, req.Address)
+	return &types.QueryAllTokenResponse{
+		Tokens:     tokens,
+		Pagination: nil,
+	}, nil
 }
