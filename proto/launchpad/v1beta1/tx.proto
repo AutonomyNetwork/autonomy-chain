@@ -1,0 +1,56 @@
+syntax = "proto3";
+package launchpad.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+import "cosmos/base/v1beta1/coin.proto";
+import "cosmos/bank/v1beta1/bank.proto";
+import "cosmos_proto/cosmos.proto";
+
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/launchpad/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateLaunchpad(MsgCreateLaunchpad) returns (MsgCreateLaunchpadResponse);
+  rpc DepositToLaunchpad(MsgDepositToLaunchpad) returns (MsgDepositToLaunchpadResponse);
+}
+
+
+// this line is used by starport scaffolding # proto/tx/message
+message MsgCreateLaunchpad {
+   option (gogoproto.equal)           = false;
+  option (gogoproto.goproto_getters) = false;
+
+  string creator = 1;
+  uint64 tokenId = 2;
+  repeated  string accepetedDenoms = 3;
+  uint64 softcap = 4;
+  uint64 hardcap = 5;
+  google.protobuf.Timestamp startTime = 6 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+  google.protobuf.Timestamp endTime = 7 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+  string status = 8; 
+}
+
+message MsgCreateLaunchpadResponse {
+  uint64 id = 1;
+  string creator = 2;
+}
+
+message MsgDepositToLaunchpad {
+  option (gogoproto.equal)           = false;
+  option (gogoproto.goproto_getters) = false;
+
+  uint64 id = 1;
+  string depositor = 2;
+  repeated cosmos.base.v1beta1.Coin amount = 3  [(gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];
+}
+
+message MsgDepositToLaunchpadResponse {
+   option (gogoproto.equal)           = false;
+  option (gogoproto.goproto_getters) = false;
+
+  uint64 id = 1;
+  string depositor = 2;
+  repeated cosmos.base.v1beta1.Coin amount = 3  [(gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];
+}

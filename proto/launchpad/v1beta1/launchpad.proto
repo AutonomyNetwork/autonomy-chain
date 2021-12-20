@@ -1,0 +1,37 @@
+syntax = "proto3";
+package launchpad.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+import "cosmos/base/v1beta1/coin.proto";
+import "cosmos/bank/v1beta1/bank.proto";
+import "cosmos_proto/cosmos.proto";
+
+
+import "gogoproto/gogo.proto";
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/launchpad/types";
+
+message Launchpad {
+  option (gogoproto.equal)           = false;
+  option (gogoproto.goproto_getters) = false;
+
+  uint64 id =1;
+  string creator = 2;
+  uint64 tokenId = 3;
+  repeated  string accepetedDenoms = 4;
+  uint64 softcap = 5;
+  uint64 hardcap = 6;
+  google.protobuf.Timestamp startTime = 7 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+  google.protobuf.Timestamp endTime = 8 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+  string status = 9; 
+}
+
+message DepositToLaunchpad{
+   option (gogoproto.equal)           = false;
+  option (gogoproto.goproto_getters) = false;
+
+  uint64 id = 1;
+  string depositor=2;
+  repeated cosmos.base.v1beta1.Coin amount = 3  [(gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];
+}

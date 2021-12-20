@@ -4,17 +4,16 @@ import (
 	"context"
 	"strconv"
 
+	"github.com/AutonomyNetwork/autonomy-chain/x/launchpad/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
-
-	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
 )
 
-func CmdListToken() *cobra.Command {
+func CmdListLaunchpad() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-tokens",
-		Short: "list all token",
+		Use:   "list-launchpads",
+		Short: "list all launchpad",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
@@ -25,11 +24,11 @@ func CmdListToken() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryAllTokenRequest{
+			params := &types.QueryAllLaunchpadRequest{
 				Pagination: pageReq,
 			}
 
-			res, err := queryClient.TokenAll(context.Background(), params)
+			res, err := queryClient.LaunchpadAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -44,10 +43,10 @@ func CmdListToken() *cobra.Command {
 	return cmd
 }
 
-func CmdShowToken() *cobra.Command {
+func CmdShowLaunchpad() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-token [id]",
-		Short: "shows a token",
+		Use:   "show-launchpad [id]",
+		Short: "shows a launchpad",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
@@ -59,11 +58,11 @@ func CmdShowToken() *cobra.Command {
 				return err
 			}
 
-			params := &types.QueryGetTokenRequest{
+			params := &types.QueryGetLaunchpadRequest{
 				Id: id,
 			}
 
-			res, err := queryClient.Token(context.Background(), params)
+			res, err := queryClient.Launchpad(context.Background(), params)
 			if err != nil {
 				return err
 			}

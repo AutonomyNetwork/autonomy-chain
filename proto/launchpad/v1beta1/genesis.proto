@@ -1,0 +1,11 @@
+syntax = "proto3";
+package launchpad.v1beta1;
+
+// this line is used by starport scaffolding # genesis/proto/import
+import "launchpad/v1beta1/launchpad.proto";
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/launchpad/types";
+
+message GenesisState {
+  repeated Launchpad launchpadList = 1;
+  uint64 launchpadCount = 2; 
+}

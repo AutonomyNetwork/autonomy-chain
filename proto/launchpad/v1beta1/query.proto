@@ -1,0 +1,43 @@
+syntax = "proto3";
+package launchpad.v1beta1;
+
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+// this line is used by starport scaffolding # 1
+import "launchpad/v1beta1/launchpad.proto";
+
+option go_package = "github.com/AutonomyNetwork/autonomy-chain/x/launchpad/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // this line is used by starport scaffolding # 2
+
+  // Queries a launchpad by id.
+  rpc Launchpad(QueryGetLaunchpadRequest) returns (QueryGetLaunchpadResponse) {
+    option (google.api.http).get = "/AutonomyNetwork/autonomychain/launchpad/launchpad/{id}";
+  }
+
+  // Queries a list of launchpad items.
+  rpc LaunchpadAll(QueryAllLaunchpadRequest) returns (QueryAllLaunchpadResponse) {
+    option (google.api.http).get = "/AutonomyNetwork/autonomychain/launchpad/launchpads";
+  }
+
+}
+
+// this line is used by starport scaffolding # 3
+message QueryGetLaunchpadRequest {
+  uint64 id = 1;
+}
+
+message QueryGetLaunchpadResponse {
+  Launchpad launchpad = 1;
+}
+
+message QueryAllLaunchpadRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllLaunchpadResponse {
+  repeated Launchpad launchpads = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}

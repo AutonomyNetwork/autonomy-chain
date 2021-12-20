@@ -6,15 +6,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
+	"github.com/AutonomyNetwork/autonomy-chain/x/launchpad/types"
 
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
 )
 
-// GetTokenCount get the total number of token
-func (k Keeper) GetTokenCount(ctx sdk.Context) uint64 {
+// GetLaunchpadCount get the total number of launchpads
+func (k Keeper) GetLaunchpadCount(ctx sdk.Context) uint64 {
 	store := ctx.KVStore(k.storeKey)
-	bz := store.Get(types.TokenCountKey)
+	bz := store.Get(types.LaunchpadCountKey)
 
 	if bz == nil {
 		return 0
@@ -28,76 +28,50 @@ func (k Keeper) GetTokenCount(ctx sdk.Context) uint64 {
 	return count
 }
 
-// SetTokenCount set the total number of token
-func (k Keeper) SetTokenCount(ctx sdk.Context, count uint64) {
+// SetLaunchpadCount set the total number of Launchpad
+func (k Keeper) SetLaunchpadCount(ctx sdk.Context, count uint64) {
 	store := ctx.KVStore(k.storeKey)
-	byteKey := types.TokenCountKey
+	byteKey := types.LaunchpadCountKey
 	bz := []byte(strconv.FormatUint(count, 10))
 	store.Set(byteKey, bz)
 }
 
-// IssueToken appends a token in the store with a new id and update the count
-func (k Keeper) IssueToken(
-	ctx sdk.Context,
-	token types.Token,
-) uint64 {
-	// Create the token count
-	count := k.GetTokenCount(ctx)
-
-	// Set the ID of the appended value
-	token.Id = count
-
+func (k Keeper) SetLaunchpad(ctx sdk.Context, launchpad types.Launchpad) {
 	store := ctx.KVStore(k.storeKey)
-	bytes := k.cdc.MustMarshal(&token)
-	store.Set(types.GetTokenKey(token.Id), bytes)
 
-	// Update token count
-	k.SetTokenCount(ctx, count+1)
+	b := types.MustMarshalLaunchpad(k.cdc, &launchpad)
 
-	return count
+	store.Set(types.GetLaunchpadKey(launchpad.Id), b)
 }
 
-// SetToken set a specific token in the store
-func (k Keeper) SetToken(ctx sdk.Context, token types.Token) {
+func (k Keeper) GetLaunchpad(ctx sdk.Context, id uint64) (launchpad types.Launchpad) {
 	store := ctx.KVStore(k.storeKey)
-
-	b := types.MustMarshalToken(k.cdc, &token)
-	// b := k.cdc.MustMarshal(&token)
-	store.Set(types.GetTokenKey(token.Id), b)
-}
-
-// GetToken returns a token from its id
-func (k Keeper) GetToken(ctx sdk.Context, id uint64) (token types.Token) {
-	store := ctx.KVStore(k.storeKey)
-	val := store.Get(types.GetTokenKey(id))
+	val := store.Get(types.GetLaunchpadKey(id))
 	if val == nil {
-		return types.Token{}
+		return types.Launchpad{}
 	}
-	token = types.MustUnmashalToken(k.cdc, val)
-	return token
+	launchpad = types.MustUnmashalLaunchpad(k.cdc, val)
+	return launchpad
 }
 
-// HasToken checks if the token exists in the store
-func (k Keeper) HasToken(ctx sdk.Context, id uint64) bool {
+func (k Keeper) HasLaunchpad(ctx sdk.Context, id uint64) bool {
 	store := ctx.KVStore(k.storeKey)
-	return store.Has(types.GetTokenKey(id))
+	return store.Has(types.GetLaunchpadKey(id))
 }
 
-// RemoveToken removes a token from the store
-func (k Keeper) RemoveToken(ctx sdk.Context, id uint64) {
+func (k Keeper) RemoveLaunchpad(ctx sdk.Context, id uint64) {
 	store := ctx.KVStore(k.storeKey)
-	store.Delete(types.GetTokenKey(id))
+	store.Delete(types.GetLaunchpadKey(id))
 }
 
-// GetAllToken returns all token
-func (k Keeper) GetAllToken(ctx sdk.Context) (list []types.Token) {
+func (k Keeper) GetAllLaunchpad(ctx sdk.Context) (list []types.Launchpad) {
 	store := ctx.KVStore(k.storeKey)
-	iterator := sdk.KVStorePrefixIterator(store, types.TokenKey)
+	iterator := sdk.KVStorePrefixIterator(store, types.LaunchpadKey)
 
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
-		var val types.Token
+		var val types.Launchpad
 		k.cdc.Unmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}

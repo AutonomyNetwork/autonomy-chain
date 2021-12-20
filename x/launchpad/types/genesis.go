@@ -10,20 +10,18 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		TokenList: []*Token{},
+		LaunchpadList: []*Launchpad{},
 	}
 }
 
-// Validate performs basic genesis state validation returning an error upon any
-// failure.
 func (gs GenesisState) Validate() error {
-	tokenIdMap := make(map[uint64]bool)
+	launchpadIdMap := make(map[uint64]bool)
 
-	for _, elem := range gs.TokenList {
-		if _, ok := tokenIdMap[elem.Id]; ok {
-			return fmt.Errorf("duplicated id for token")
+	for _, elem := range gs.LaunchpadList {
+		if _, ok := launchpadIdMap[elem.TokenId]; ok {
+			return fmt.Errorf("duplicated id for launchpad")
 		}
-		tokenIdMap[elem.Id] = true
+		launchpadIdMap[elem.TokenId] = true
 	}
 
 	return nil
