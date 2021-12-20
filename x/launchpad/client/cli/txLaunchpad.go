@@ -34,8 +34,10 @@ func CmdCreateLaunchpad() *cobra.Command {
 			softcap, _ := cmd.Flags().GetUint64(FlagSoftCap)
 			hardcap, _ := cmd.Flags().GetUint64(FlagHardCap)
 
-			if softcap <= hardcap {
-				return fmt.Errorf("softcap shoud not be less then hardcap")
+			fmt.Println("haaaaaaaaaaaaaaard cap", hardcap)
+
+			if softcap > hardcap {
+				return fmt.Errorf("softcap shoud be less then hardcap")
 			}
 
 			// startTime, _ := cmd.Flags().GetString(FlagStartTime)
@@ -58,8 +60,6 @@ func CmdCreateLaunchpad() *cobra.Command {
 				return err
 			}
 
-			fmt.Println(time.Now())
-
 			msg := types.NewMsgCreateLunchpad(clientCtx.GetFromAddress().String(),
 				tokenId, denoms, softcap, hardcap, time.Now(), time.Now())
 			if err := msg.ValidateBasic(); err != nil {
@@ -74,7 +74,7 @@ func CmdCreateLaunchpad() *cobra.Command {
 	cmd.Flags().Uint64(FlagTokenID, 0, "launchpad ending time")
 	cmd.Flags().String(FlagAcceptedDenoms, "aut", "accepted deposit denoms for launchpad in comma seperated string")
 	cmd.Flags().Uint64(FlagSoftCap, 0, "expected softcap value in number")
-	cmd.Flags().Uint(FlagHardCap, 0, "expected hardcap value in number")
+	cmd.Flags().Uint64(FlagHardCap, 0, "expected hardcap value in number")
 	cmd.Flags().String(FlagStartTime, "", "launchpad starting time in nano seconds")
 	cmd.Flags().String(FlagEndTime, "", "launchpad ending time in nano seconds")
 

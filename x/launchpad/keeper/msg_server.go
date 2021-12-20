@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
@@ -23,6 +24,17 @@ var _ types.MsgServer = msgServer{}
 func (k msgServer) CreateLaunchpad(goctx context.Context, t *types.MsgCreateLaunchpad) (*types.MsgCreateLaunchpadResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goctx)
 	count := k.GetLaunchpadCount(ctx)
+	tr := k.issuenceKeeper.HasToken(ctx, t.TokenId)
+
+	if !tr {
+		return nil, fmt.Errorf("no token find with token-id")
+	}
+
+	token := k.issuenceKeeper.GetToken(ctx, t.TokenId)
+
+	if token.Creator != t.Creator {
+		return nil, fmt.Errorf("unauthorized creator")
+	}
 
 	launchpad := types.Launchpad{
 		Id:              count,

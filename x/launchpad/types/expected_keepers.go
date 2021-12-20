@@ -22,4 +22,5 @@ type BankKeeper interface {
 
 type IssuenceKeeper interface {
 	GetToken(ctx sdk.Context, id uint64) (token issuence.Token)
+	HasToken(ctx sdk.Context, id uint64) bool
 }
