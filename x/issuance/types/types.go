@@ -43,3 +43,5 @@ func UnMarshalToken(cdc codec.BinaryCodec, value []byte) (token Token, err error
 	err = cdc.Unmarshal(value, &token)
 	return token, err
 }
+
+

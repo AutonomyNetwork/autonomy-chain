@@ -14,12 +14,22 @@ service Query {
 
   // Queries a token by id.
   rpc Token(QueryGetTokenRequest) returns (QueryGetTokenResponse) {
-    option (google.api.http).get = "/AutonomyNetwork/autonomychain/issuance/token/{id}";
+    option (google.api.http).get = "/autonomy/issuance/v1beta1/token/{id}";
   }
 
   // Queries a list of token items.
   rpc TokenAll(QueryAllTokenRequest) returns (QueryAllTokenResponse) {
-    option (google.api.http).get = "/AutonomyNetwork/autonomychain/issuance/tokens";
+    option (google.api.http).get = "/autonomy/issuance/v1beta1/tokens";
+  }
+
+  // Query  token by address
+  rpc TokenByDenom(QueryTokenByDenomRequest) returns (QueryGetTokenResponse){
+    option (google.api.http).get = "/autonomy/issuance/v1beta1/tokenbydenom/{denom}";
+  }
+
+  // Query tokens by Owner
+  rpc TokensByOwner(QueryTokensByOwnerRequest) returns (QueryAllTokenResponse){
+    option (google.api.http).get ="/autonomy/issuance/v1beta1/tokensbyowner/{address}";
   }
 
 }
@@ -40,4 +50,13 @@ message QueryAllTokenRequest {
 message QueryAllTokenResponse {
   repeated Token tokens = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryTokensByOwnerRequest {
+  string address = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryTokenByDenomRequest {
+  string denom =1;
 }

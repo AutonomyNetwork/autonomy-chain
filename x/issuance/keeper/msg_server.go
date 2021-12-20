@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
 
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
@@ -28,6 +29,16 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 	count := k.GetTokenCount(ctx)
 
 	denom := strings.ToLower(t.Denom)
+	
+	
+	//Check Denom Exist
+	tokens:= k.GetAllToken(ctx)
+	for _, token := range tokens{
+		if strings.EqualFold(denom, token.Denom){
+			return nil,  sdkerrors.Wrapf(nil,"invalid token denom: %s", t.Denom)
+		}
+	}
+	
 	token := types.Token{
 		Creator:       t.Creator,
 		Id:            count,
@@ -35,7 +46,7 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 		Decimals:      t.Decimals,
 		DisplayName:   strings.ToLower(t.DisplayName),
 		InitialSupply: t.InitialSupply,
-		Holders:       0,
+		Holders:       1,
 	}
 
 	if err := k.MintToken(ctx, t.Creator, sdk.NewCoin(t.Denom, sdk.NewIntFromUint64(t.InitialSupply))); err != nil {
