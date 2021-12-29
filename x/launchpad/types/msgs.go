@@ -8,18 +8,17 @@ import (
 
 var _ sdk.Msg = &MsgCreateLaunchpad{}
 
-func NewMsgCreateLunchpad(creator string, tokenId uint64,
-	denoms []string, softcap, hardcap uint64,
+func NewMsgCreateLunchpad(creator string, tokenId, supply uint64, softcap, hardcap uint64,
 	startTime, endTime time.Time) *MsgCreateLaunchpad {
 	return &MsgCreateLaunchpad{
-		Creator:         creator,
-		TokenId:         tokenId,
-		AccepetedDenoms: denoms,
-		Softcap:         softcap,
-		Hardcap:         hardcap,
-		StartTime:       startTime,
-		EndTime:         endTime,
-		Status:          "CREATED",
+		Creator:   creator,
+		TokenId:   tokenId,
+		Supply:    supply,
+		Softcap:   softcap,
+		Hardcap:   hardcap,
+		StartTime: startTime,
+		EndTime:   endTime,
+		Status:    "CREATED",
 	}
 }
 
@@ -51,7 +50,7 @@ func (m *MsgCreateLaunchpad) GetSigners() []sdk.AccAddress {
 
 var _ sdk.Msg = &MsgDepositToLaunchpad{}
 
-func NewMsgDepositToLaunchpad(id uint64, depositor string, amount sdk.Coins) *MsgDepositToLaunchpad {
+func NewMsgDepositToLaunchpad(id uint64, depositor string, amount sdk.Coin) *MsgDepositToLaunchpad {
 	return &MsgDepositToLaunchpad{
 		Id:        id,
 		Depositor: depositor,

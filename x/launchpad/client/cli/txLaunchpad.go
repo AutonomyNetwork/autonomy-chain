@@ -2,7 +2,6 @@ package cli
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -24,17 +23,9 @@ func CmdCreateLaunchpad() *cobra.Command {
 		Short: "Crate a new launchpad",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			tokenId, _ := cmd.Flags().GetUint64(FlagTokenID)
-			accepetedDenoms, _ := cmd.Flags().GetString(FlagAcceptedDenoms)
-
-			denoms := strings.Split(accepetedDenoms, ",")
-
-			if len(denoms) == 0 {
-				return fmt.Errorf("invalid accpeted denoms")
-			}
+			supply, _ := cmd.Flags().GetUint64(FlagSupply)
 			softcap, _ := cmd.Flags().GetUint64(FlagSoftCap)
 			hardcap, _ := cmd.Flags().GetUint64(FlagHardCap)
-
-			fmt.Println("haaaaaaaaaaaaaaard cap", hardcap)
 
 			if softcap > hardcap {
 				return fmt.Errorf("softcap shoud be less then hardcap")
@@ -43,15 +34,20 @@ func CmdCreateLaunchpad() *cobra.Command {
 			// startTime, _ := cmd.Flags().GetString(FlagStartTime)
 			// endTime, _ := cmd.Flags().GetString(FlagHardCap)
 
-			// sTime, err := time.Parse("  RFC3339:\t\t", startTime)
-			// if err != nil {
-			// 	return err
-			// }
+			str := "2014-11-12T11:45:26.371Z"
 
-			// eTime, err := time.Parse("  RFC3339:\t\t", endTime)
-			// if err != nil {
-			// 	return err
-			// }
+			startTime := str
+			endTime := str
+
+			sTime, err := time.Parse(time.RFC3339, startTime)
+			if err != nil {
+				return err
+			}
+
+			eTime, err := time.Parse(time.RFC3339, endTime)
+			if err != nil {
+				return err
+			}
 
 			//TODO: Need to compare times start time < end time
 
@@ -61,7 +57,7 @@ func CmdCreateLaunchpad() *cobra.Command {
 			}
 
 			msg := types.NewMsgCreateLunchpad(clientCtx.GetFromAddress().String(),
-				tokenId, denoms, softcap, hardcap, time.Now(), time.Now())
+				tokenId, supply, softcap, hardcap, sTime, eTime)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -72,7 +68,7 @@ func CmdCreateLaunchpad() *cobra.Command {
 
 	flags.AddTxFlagsToCmd(cmd)
 	cmd.Flags().Uint64(FlagTokenID, 0, "launchpad ending time")
-	cmd.Flags().String(FlagAcceptedDenoms, "aut", "accepted deposit denoms for launchpad in comma seperated string")
+	cmd.Flags().Uint64(FlagSupply, 0, "token supply adding for launchpad")
 	cmd.Flags().Uint64(FlagSoftCap, 0, "expected softcap value in number")
 	cmd.Flags().Uint64(FlagHardCap, 0, "expected hardcap value in number")
 	cmd.Flags().String(FlagStartTime, "", "launchpad starting time in nano seconds")
@@ -93,7 +89,7 @@ func CmdDepositToLaunchpad() *cobra.Command {
 				return err
 			}
 
-			argsAmount, err := sdk.ParseCoinsNormalized(args[2])
+			argsAmount, err := sdk.ParseCoinNormalized(args[2])
 			if err != nil {
 				return err
 			}

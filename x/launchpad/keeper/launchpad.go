@@ -79,6 +79,53 @@ func (k Keeper) GetAllLaunchpad(ctx sdk.Context) (list []types.Launchpad) {
 	return
 }
 
+func (k Keeper) GetDepositToLaunchpadCount(ctx sdk.Context) uint64 {
+	store := ctx.KVStore(k.storeKey)
+	bz := store.Get(types.LaunchpadDepositCountKey)
+
+	if bz == nil {
+		return 0
+	}
+
+	count, err := strconv.ParseUint(string(bz), 10, 64)
+	if err != nil {
+		panic("cannot decode count")
+	}
+
+	return count
+}
+
+// SetLaunchpadCount set the total number of Launchpad
+func (k Keeper) SetDepositLaunchpadCount(ctx sdk.Context, count uint64) {
+	store := ctx.KVStore(k.storeKey)
+	byteKey := types.LaunchpadDepositCountKey
+	bz := []byte(strconv.FormatUint(count, 10))
+	store.Set(byteKey, bz)
+}
+
+func (k Keeper) SetDepositToLaunchpad(ctx sdk.Context, id uint64, count uint64, deposit types.DepositToLaunchpad) {
+	store := ctx.KVStore(k.storeKey)
+
+	b := types.MustMarshalDepositToLaunchpad(k.cdc, &deposit)
+
+	store.Set(types.GetDepositToLaunchpadKey(id, count), b)
+}
+
+func (k Keeper) GetAllDepositsOfLaunchpad(ctx sdk.Context, count, id uint64) (list []types.Launchpad) {
+	store := ctx.KVStore(k.storeKey)
+	iterator := sdk.KVStorePrefixIterator(store, types.GetDepositToLaunchpadKey(count, id))
+
+	defer iterator.Close()
+
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.Launchpad
+		k.cdc.Unmarshal(iterator.Value(), &val)
+		list = append(list, val)
+	}
+
+	return
+}
+
 // Bank keeper functions
 
 func (k Keeper) MintToken(ctx sdk.Context, address string, amount sdk.Coin) error {

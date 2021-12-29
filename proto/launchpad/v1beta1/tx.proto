@@ -24,7 +24,7 @@ message MsgCreateLaunchpad {
 
   string creator = 1;
   uint64 tokenId = 2;
-  repeated  string accepetedDenoms = 3;
+  uint64 supply = 3;
   uint64 softcap = 4;
   uint64 hardcap = 5;
   google.protobuf.Timestamp startTime = 6 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
@@ -43,7 +43,7 @@ message MsgDepositToLaunchpad {
 
   uint64 id = 1;
   string depositor = 2;
-  repeated cosmos.base.v1beta1.Coin amount = 3  [(gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];
+ cosmos.base.v1beta1.Coin amount = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgDepositToLaunchpadResponse {

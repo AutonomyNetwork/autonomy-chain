@@ -31,15 +31,33 @@ func MustMarshalLaunchpad(cdc codec.BinaryCodec, launchpad *Launchpad) []byte {
 }
 
 func MustUnmashalLaunchpad(cdc codec.BinaryCodec, value []byte) (launchpad Launchpad) {
-	token, err := UnMarshalLaunchpad(cdc, value)
+	launch, err := UnMarshalLaunchpad(cdc, value)
 	if err != nil {
 		panic(err)
 	}
 
-	return token
+	return launch
 }
 
 func UnMarshalLaunchpad(cdc codec.BinaryCodec, value []byte) (launchpad Launchpad, err error) {
 	err = cdc.Unmarshal(value, &launchpad)
 	return launchpad, err
+}
+
+func MustMarshalDepositToLaunchpad(cdc codec.BinaryCodec, deposit *DepositToLaunchpad) []byte {
+	return cdc.MustMarshal(deposit)
+}
+
+func MustUnmashalDepositToLaunchpad(cdc codec.BinaryCodec, value []byte) (deposit DepositToLaunchpad) {
+	depo, err := UnMarshalDepositToLaunchpad(cdc, value)
+	if err != nil {
+		panic(err)
+	}
+
+	return depo
+}
+
+func UnMarshalDepositToLaunchpad(cdc codec.BinaryCodec, value []byte) (deposit DepositToLaunchpad, err error) {
+	err = cdc.Unmarshal(value, &deposit)
+	return deposit, err
 }

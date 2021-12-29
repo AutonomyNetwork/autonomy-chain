@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/AutonomyNetwork/autonomy-chain/x/launchpad/types"
 )
@@ -27,25 +28,32 @@ func (k msgServer) CreateLaunchpad(goctx context.Context, t *types.MsgCreateLaun
 	tr := k.issuenceKeeper.HasToken(ctx, t.TokenId)
 
 	if !tr {
-		return nil, fmt.Errorf("no token find with token-id")
+		fmt.Printf("invalid token id")
+		return nil, sdkerrors.Wrapf(nil, "invalid token id: %d", t.TokenId)
 	}
 
 	token := k.issuenceKeeper.GetToken(ctx, t.TokenId)
 
 	if token.Creator != t.Creator {
-		return nil, fmt.Errorf("unauthorized creator")
+		fmt.Printf("unauthorized creator")
+		return nil, sdkerrors.Wrapf(nil, "unauthorized creator")
+	}
+
+	if token.InitialSupply < t.Supply {
+		fmt.Printf("launchpad supply should be less than token totla supply")
+		return nil, sdkerrors.Wrapf(nil, "launchpad supply should be less than token totla supply")
 	}
 
 	launchpad := types.Launchpad{
-		Id:              count,
-		Creator:         t.Creator,
-		TokenId:         t.TokenId,
-		AccepetedDenoms: t.AccepetedDenoms,
-		Softcap:         t.Softcap,
-		Hardcap:         t.Hardcap,
-		StartTime:       t.StartTime,
-		EndTime:         t.EndTime,
-		Status:          t.Status,
+		Id:        count,
+		Creator:   t.Creator,
+		TokenId:   t.TokenId,
+		Supply:    t.Supply,
+		Softcap:   t.Softcap,
+		Hardcap:   t.Hardcap,
+		StartTime: t.StartTime,
+		EndTime:   t.EndTime,
+		Status:    t.Status,
 	}
 
 	k.SetLaunchpad(ctx, launchpad)
@@ -61,6 +69,37 @@ func (k msgServer) CreateLaunchpad(goctx context.Context, t *types.MsgCreateLaun
 
 }
 
-func (m msgServer) DepositToLaunchpad(goctx context.Context, t *types.MsgDepositToLaunchpad) (*types.MsgDepositToLaunchpadResponse, error) {
+func (k msgServer) DepositToLaunchpad(goctx context.Context, t *types.MsgDepositToLaunchpad) (*types.MsgDepositToLaunchpadResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+	l := k.HasLaunchpad(ctx, t.Id)
+	count := k.GetDepositToLaunchpadCount(ctx)
+	if !l {
+		fmt.Printf("invalid launchpad id")
+		return nil, sdkerrors.Wrapf(nil, "invalid launchpad id")
+	}
+
+	lp := k.GetLaunchpad(ctx, t.Id)
+
+	if lp.Status != "CREATED" {
+		fmt.Printf("invalid launchpad status")
+		return nil, sdkerrors.Wrapf(nil, "invalid launchpad status")
+	}
+
+	err := k.bankKeeper.SendCoinsFromAccountToModule(ctx,
+		sdk.AccAddress(t.Depositor), types.ModuleName, sdk.Coins{t.Amount})
+
+	if err != nil {
+		fmt.Printf("error while subtracting balance from depoistor account")
+		return nil, sdkerrors.Wrapf(nil, "error while subtracting balance from depoistor account")
+	}
+
+	dep := types.DepositToLaunchpad{
+		Id:        lp.Id,
+		Depositor: t.Depositor,
+		Amount:    t.Amount,
+	}
+
+	k.SetDepositToLaunchpad(ctx, lp.Id, count, dep)
+	k.SetDepositLaunchpadCount(ctx, count+1)
 	return &types.MsgDepositToLaunchpadResponse{Id: 0}, nil
 }
