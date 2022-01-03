@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 	"strings"
-	
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
-	
+
 	"github.com/AutonomyNetwork/autonomy-chain/x/issuance/types"
 )
 
@@ -27,7 +27,7 @@ var _ types.MsgServer = msgServer{}
 func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*types.MsgIssueTokenResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goctx)
 	count := k.GetTokenCount(ctx)
-	
+
 	denom := strings.ToLower(t.Denom)
 	
 	
@@ -42,19 +42,19 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 	token := types.Token{
 		Creator:       t.Creator,
 		Id:            count,
-		Denom:         denom,
+		Denom:         strings.ToLower(denom),
 		Decimals:      t.Decimals,
 		DisplayName:   strings.ToLower(t.DisplayName),
 		InitialSupply: t.InitialSupply,
 		Holders:       1,
 	}
-	
+
 	if err := k.MintToken(ctx, t.Creator, sdk.NewCoin(t.Denom, sdk.NewIntFromUint64(t.InitialSupply))); err != nil {
 		return nil, err
 	}
 	k.SetToken(ctx, token)
 	k.SetTokenCount(ctx, count+1)
-	
+
 	metaData := bank.Metadata{
 		Description: fmt.Sprintf("The details about %s token", denom),
 		DenomUnits: []*bank.DenomUnit{
@@ -64,9 +64,9 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 		Base:    denom,
 		Display: t.DisplayName,
 	}
-	
+
 	k.SetDenomMetaData(ctx, metaData)
-	
+
 	_ = ctx.EventManager().EmitTypedEvents(
 		&types.EventIssueToken{
 			Address:       t.Creator,
@@ -75,7 +75,7 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 			Denom:         t.Denom,
 		},
 		&types.EventModuleName)
-	
+
 	return &types.MsgIssueTokenResponse{Id: count}, nil
-	
+
 }
