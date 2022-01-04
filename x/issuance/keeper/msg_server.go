@@ -49,7 +49,7 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 		Holders:       1,
 	}
 
-	if err := k.MintToken(ctx, t.Creator, sdk.NewCoin(t.Denom, sdk.NewIntFromUint64(t.InitialSupply))); err != nil {
+	if err := k.MintToken(ctx, t.Creator, sdk.NewCoin(denom, sdk.NewIntFromUint64(t.InitialSupply))); err != nil {
 		return nil, err
 	}
 	k.SetToken(ctx, token)
@@ -62,7 +62,7 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 			{Denom: strings.ToLower(t.DisplayName), Exponent: uint32(t.Decimals)},
 		},
 		Base:    denom,
-		Display: t.DisplayName,
+		Display: strings.ToLower(t.DisplayName),
 	}
 
 	k.SetDenomMetaData(ctx, metaData)
