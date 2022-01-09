@@ -30,7 +30,7 @@ func (k Keeper) LaunchpadAll(c context.Context, req *types.QueryAllLaunchpadRequ
 		if err != nil {
 			return err
 		}
-		// token.Holders = uint64(len(k.GetDenomHolders(ctx, token.Denom)))
+
 		launchpads = append(launchpads, &launchpad)
 
 		return nil
@@ -41,6 +41,74 @@ func (k Keeper) LaunchpadAll(c context.Context, req *types.QueryAllLaunchpadRequ
 	}
 
 	return &types.QueryAllLaunchpadResponse{Launchpads: launchpads, Pagination: pageRes}, nil
+}
+
+func (k Keeper) CreatedLaunchpads(c context.Context, req *types.QueryCreatedLaunchpadRequest) (*types.QueryCreatedLaunchpadResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(c)
+
+	ids := k.GetCreatedLaunchpads(ctx)
+	var launchpads []*types.Launchpad
+	for _, id := range ids.CreatedLaunchpads {
+		lp := k.GetLaunchpad(ctx, id)
+		launchpads = append(launchpads, &lp)
+	}
+
+	return &types.QueryCreatedLaunchpadResponse{Launchpads: launchpads}, nil
+}
+
+func (k Keeper) ActiveLaunchpads(c context.Context, req *types.QueryActiveLaunchpadRequest) (*types.QueryActiveLaunchpadResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(c)
+
+	ids := k.GetActiveLaunchpads(ctx)
+	var launchpads []*types.Launchpad
+	for _, id := range ids.ActiveLaunchpads {
+		lp := k.GetLaunchpad(ctx, id)
+		launchpads = append(launchpads, &lp)
+	}
+
+	return &types.QueryActiveLaunchpadResponse{Launchpads: launchpads}, nil
+}
+
+func (k Keeper) SuccessLaunchpads(c context.Context, req *types.QuerySuccessLaunchpadRequest) (*types.QuerySuccessLaunchpadResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(c)
+
+	ids := k.GetSuccessLaunchpads(ctx)
+	var launchpads []*types.Launchpad
+	for _, id := range ids.SuccessLaunchpads {
+		lp := k.GetLaunchpad(ctx, id)
+		launchpads = append(launchpads, &lp)
+	}
+
+	return &types.QuerySuccessLaunchpadResponse{Launchpads: launchpads}, nil
+}
+
+func (k Keeper) FailLaunchpads(c context.Context, req *types.QueryFailLaunchpadRequest) (*types.QueryFailLaunchpadResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(c)
+
+	ids := k.GetFailLaunchpads(ctx)
+	var launchpads []*types.Launchpad
+	for _, id := range ids.SuccessLaunchpads {
+		lp := k.GetLaunchpad(ctx, id)
+		launchpads = append(launchpads, &lp)
+	}
+
+	return &types.QueryFailLaunchpadResponse{Launchpads: launchpads}, nil
 }
 
 func (k Keeper) Launchpad(c context.Context, req *types.QueryGetLaunchpadRequest) (*types.QueryGetLaunchpadResponse, error) {

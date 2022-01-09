@@ -22,6 +22,19 @@ service Query {
     option (google.api.http).get = "/AutonomyNetwork/autonomychain/launchpad/launchpads";
   }
 
+  rpc CreatedLaunchpads(QueryCreatedLaunchpadRequest) returns (QueryCreatedLaunchpadResponse) {
+    option (google.api.http).get = "/AutonomyNetwork/autonomychain/launchpads/created";
+  }
+  rpc ActiveLaunchpads(QueryActiveLaunchpadRequest) returns (QueryActiveLaunchpadResponse) {
+    option (google.api.http).get = "/AutonomyNetwork/autonomychain/launchpads/active";
+  }
+  rpc SuccessLaunchpads(QuerySuccessLaunchpadRequest) returns (QuerySuccessLaunchpadResponse) {
+    option (google.api.http).get = "/AutonomyNetwork/autonomychain/launchpads/success";
+  }
+  rpc FailLaunchpads(QueryFailLaunchpadRequest) returns (QueryFailLaunchpadResponse) {
+    option (google.api.http).get = "/AutonomyNetwork/autonomychain/launchpads/fail";
+  }
+
 }
 
 // this line is used by starport scaffolding # 3
@@ -41,3 +54,28 @@ message QueryAllLaunchpadResponse {
   repeated Launchpad launchpads = 1;
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
+
+message QueryCreatedLaunchpadRequest {}
+
+message QueryCreatedLaunchpadResponse {
+  repeated Launchpad launchpads = 1;
+}
+
+message QueryActiveLaunchpadRequest {}
+
+message QueryActiveLaunchpadResponse {
+  repeated Launchpad launchpads = 1;
+}
+
+message QuerySuccessLaunchpadRequest {}
+
+message QuerySuccessLaunchpadResponse {
+  repeated Launchpad launchpads = 1;
+}
+
+message QueryFailLaunchpadRequest {}
+
+message QueryFailLaunchpadResponse {
+  repeated Launchpad launchpads = 1;
+}
+

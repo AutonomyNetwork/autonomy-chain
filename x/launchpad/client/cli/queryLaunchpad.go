@@ -43,6 +43,106 @@ func CmdListLaunchpad() *cobra.Command {
 	return cmd
 }
 
+func CmdCreatedLaunchpads() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "list-created-launchpads",
+		Short: "list all created launchpad",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx := client.GetClientContextFromCmd(cmd)
+
+			queryClient := types.NewQueryClient(clientCtx)
+
+			params := &types.QueryCreatedLaunchpadRequest{}
+
+			res, err := queryClient.CreatedLaunchpads(context.Background(), params)
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintProto(res)
+		},
+	}
+
+	flags.AddQueryFlagsToCmd(cmd)
+
+	return cmd
+}
+
+func CmdActiveLaunchpads() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "list-active-launchpads",
+		Short: "list all active launchpad",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx := client.GetClientContextFromCmd(cmd)
+
+			queryClient := types.NewQueryClient(clientCtx)
+
+			params := &types.QueryActiveLaunchpadRequest{}
+
+			res, err := queryClient.ActiveLaunchpads(context.Background(), params)
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintProto(res)
+		},
+	}
+
+	flags.AddQueryFlagsToCmd(cmd)
+
+	return cmd
+}
+
+func CmdSuccessLaunchpads() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "list-success-launchpads",
+		Short: "list all success launchpad",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx := client.GetClientContextFromCmd(cmd)
+
+			queryClient := types.NewQueryClient(clientCtx)
+
+			params := &types.QuerySuccessLaunchpadRequest{}
+
+			res, err := queryClient.SuccessLaunchpads(context.Background(), params)
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintProto(res)
+		},
+	}
+
+	flags.AddQueryFlagsToCmd(cmd)
+
+	return cmd
+}
+
+func CmdFailLaunchpads() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "list-fail-launchpads",
+		Short: "list all fail launchpad",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx := client.GetClientContextFromCmd(cmd)
+
+			queryClient := types.NewQueryClient(clientCtx)
+
+			params := &types.QueryFailLaunchpadRequest{}
+
+			res, err := queryClient.FailLaunchpads(context.Background(), params)
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintProto(res)
+		},
+	}
+
+	flags.AddQueryFlagsToCmd(cmd)
+
+	return cmd
+}
+
 func CmdShowLaunchpad() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "show-launchpad [id]",

@@ -214,44 +214,384 @@ func (m *QueryAllLaunchpadResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
+type QueryCreatedLaunchpadRequest struct {
+}
+
+func (m *QueryCreatedLaunchpadRequest) Reset()         { *m = QueryCreatedLaunchpadRequest{} }
+func (m *QueryCreatedLaunchpadRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryCreatedLaunchpadRequest) ProtoMessage()    {}
+func (*QueryCreatedLaunchpadRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_03b13225aaadc668, []int{4}
+}
+func (m *QueryCreatedLaunchpadRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryCreatedLaunchpadRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryCreatedLaunchpadRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryCreatedLaunchpadRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryCreatedLaunchpadRequest.Merge(m, src)
+}
+func (m *QueryCreatedLaunchpadRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryCreatedLaunchpadRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryCreatedLaunchpadRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryCreatedLaunchpadRequest proto.InternalMessageInfo
+
+type QueryCreatedLaunchpadResponse struct {
+	Launchpads []*Launchpad `protobuf:"bytes,1,rep,name=launchpads,proto3" json:"launchpads,omitempty"`
+}
+
+func (m *QueryCreatedLaunchpadResponse) Reset()         { *m = QueryCreatedLaunchpadResponse{} }
+func (m *QueryCreatedLaunchpadResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryCreatedLaunchpadResponse) ProtoMessage()    {}
+func (*QueryCreatedLaunchpadResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_03b13225aaadc668, []int{5}
+}
+func (m *QueryCreatedLaunchpadResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryCreatedLaunchpadResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryCreatedLaunchpadResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryCreatedLaunchpadResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryCreatedLaunchpadResponse.Merge(m, src)
+}
+func (m *QueryCreatedLaunchpadResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryCreatedLaunchpadResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryCreatedLaunchpadResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryCreatedLaunchpadResponse proto.InternalMessageInfo
+
+func (m *QueryCreatedLaunchpadResponse) GetLaunchpads() []*Launchpad {
+	if m != nil {
+		return m.Launchpads
+	}
+	return nil
+}
+
+type QueryActiveLaunchpadRequest struct {
+}
+
+func (m *QueryActiveLaunchpadRequest) Reset()         { *m = QueryActiveLaunchpadRequest{} }
+func (m *QueryActiveLaunchpadRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryActiveLaunchpadRequest) ProtoMessage()    {}
+func (*QueryActiveLaunchpadRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_03b13225aaadc668, []int{6}
+}
+func (m *QueryActiveLaunchpadRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryActiveLaunchpadRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryActiveLaunchpadRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryActiveLaunchpadRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryActiveLaunchpadRequest.Merge(m, src)
+}
+func (m *QueryActiveLaunchpadRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryActiveLaunchpadRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryActiveLaunchpadRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryActiveLaunchpadRequest proto.InternalMessageInfo
+
+type QueryActiveLaunchpadResponse struct {
+	Launchpads []*Launchpad `protobuf:"bytes,1,rep,name=launchpads,proto3" json:"launchpads,omitempty"`
+}
+
+func (m *QueryActiveLaunchpadResponse) Reset()         { *m = QueryActiveLaunchpadResponse{} }
+func (m *QueryActiveLaunchpadResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryActiveLaunchpadResponse) ProtoMessage()    {}
+func (*QueryActiveLaunchpadResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_03b13225aaadc668, []int{7}
+}
+func (m *QueryActiveLaunchpadResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryActiveLaunchpadResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryActiveLaunchpadResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryActiveLaunchpadResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryActiveLaunchpadResponse.Merge(m, src)
+}
+func (m *QueryActiveLaunchpadResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryActiveLaunchpadResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryActiveLaunchpadResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryActiveLaunchpadResponse proto.InternalMessageInfo
+
+func (m *QueryActiveLaunchpadResponse) GetLaunchpads() []*Launchpad {
+	if m != nil {
+		return m.Launchpads
+	}
+	return nil
+}
+
+type QuerySuccessLaunchpadRequest struct {
+}
+
+func (m *QuerySuccessLaunchpadRequest) Reset()         { *m = QuerySuccessLaunchpadRequest{} }
+func (m *QuerySuccessLaunchpadRequest) String() string { return proto.CompactTextString(m) }
+func (*QuerySuccessLaunchpadRequest) ProtoMessage()    {}
+func (*QuerySuccessLaunchpadRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_03b13225aaadc668, []int{8}
+}
+func (m *QuerySuccessLaunchpadRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QuerySuccessLaunchpadRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QuerySuccessLaunchpadRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QuerySuccessLaunchpadRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QuerySuccessLaunchpadRequest.Merge(m, src)
+}
+func (m *QuerySuccessLaunchpadRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QuerySuccessLaunchpadRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QuerySuccessLaunchpadRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QuerySuccessLaunchpadRequest proto.InternalMessageInfo
+
+type QuerySuccessLaunchpadResponse struct {
+	Launchpads []*Launchpad `protobuf:"bytes,1,rep,name=launchpads,proto3" json:"launchpads,omitempty"`
+}
+
+func (m *QuerySuccessLaunchpadResponse) Reset()         { *m = QuerySuccessLaunchpadResponse{} }
+func (m *QuerySuccessLaunchpadResponse) String() string { return proto.CompactTextString(m) }
+func (*QuerySuccessLaunchpadResponse) ProtoMessage()    {}
+func (*QuerySuccessLaunchpadResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_03b13225aaadc668, []int{9}
+}
+func (m *QuerySuccessLaunchpadResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QuerySuccessLaunchpadResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QuerySuccessLaunchpadResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QuerySuccessLaunchpadResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QuerySuccessLaunchpadResponse.Merge(m, src)
+}
+func (m *QuerySuccessLaunchpadResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QuerySuccessLaunchpadResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QuerySuccessLaunchpadResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QuerySuccessLaunchpadResponse proto.InternalMessageInfo
+
+func (m *QuerySuccessLaunchpadResponse) GetLaunchpads() []*Launchpad {
+	if m != nil {
+		return m.Launchpads
+	}
+	return nil
+}
+
+type QueryFailLaunchpadRequest struct {
+}
+
+func (m *QueryFailLaunchpadRequest) Reset()         { *m = QueryFailLaunchpadRequest{} }
+func (m *QueryFailLaunchpadRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryFailLaunchpadRequest) ProtoMessage()    {}
+func (*QueryFailLaunchpadRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_03b13225aaadc668, []int{10}
+}
+func (m *QueryFailLaunchpadRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryFailLaunchpadRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryFailLaunchpadRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryFailLaunchpadRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryFailLaunchpadRequest.Merge(m, src)
+}
+func (m *QueryFailLaunchpadRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryFailLaunchpadRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryFailLaunchpadRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryFailLaunchpadRequest proto.InternalMessageInfo
+
+type QueryFailLaunchpadResponse struct {
+	Launchpads []*Launchpad `protobuf:"bytes,1,rep,name=launchpads,proto3" json:"launchpads,omitempty"`
+}
+
+func (m *QueryFailLaunchpadResponse) Reset()         { *m = QueryFailLaunchpadResponse{} }
+func (m *QueryFailLaunchpadResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryFailLaunchpadResponse) ProtoMessage()    {}
+func (*QueryFailLaunchpadResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_03b13225aaadc668, []int{11}
+}
+func (m *QueryFailLaunchpadResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryFailLaunchpadResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryFailLaunchpadResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryFailLaunchpadResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryFailLaunchpadResponse.Merge(m, src)
+}
+func (m *QueryFailLaunchpadResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryFailLaunchpadResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryFailLaunchpadResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryFailLaunchpadResponse proto.InternalMessageInfo
+
+func (m *QueryFailLaunchpadResponse) GetLaunchpads() []*Launchpad {
+	if m != nil {
+		return m.Launchpads
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryGetLaunchpadRequest)(nil), "launchpad.v1beta1.QueryGetLaunchpadRequest")
 	proto.RegisterType((*QueryGetLaunchpadResponse)(nil), "launchpad.v1beta1.QueryGetLaunchpadResponse")
 	proto.RegisterType((*QueryAllLaunchpadRequest)(nil), "launchpad.v1beta1.QueryAllLaunchpadRequest")
 	proto.RegisterType((*QueryAllLaunchpadResponse)(nil), "launchpad.v1beta1.QueryAllLaunchpadResponse")
+	proto.RegisterType((*QueryCreatedLaunchpadRequest)(nil), "launchpad.v1beta1.QueryCreatedLaunchpadRequest")
+	proto.RegisterType((*QueryCreatedLaunchpadResponse)(nil), "launchpad.v1beta1.QueryCreatedLaunchpadResponse")
+	proto.RegisterType((*QueryActiveLaunchpadRequest)(nil), "launchpad.v1beta1.QueryActiveLaunchpadRequest")
+	proto.RegisterType((*QueryActiveLaunchpadResponse)(nil), "launchpad.v1beta1.QueryActiveLaunchpadResponse")
+	proto.RegisterType((*QuerySuccessLaunchpadRequest)(nil), "launchpad.v1beta1.QuerySuccessLaunchpadRequest")
+	proto.RegisterType((*QuerySuccessLaunchpadResponse)(nil), "launchpad.v1beta1.QuerySuccessLaunchpadResponse")
+	proto.RegisterType((*QueryFailLaunchpadRequest)(nil), "launchpad.v1beta1.QueryFailLaunchpadRequest")
+	proto.RegisterType((*QueryFailLaunchpadResponse)(nil), "launchpad.v1beta1.QueryFailLaunchpadResponse")
 }
 
 func init() { proto.RegisterFile("launchpad/v1beta1/query.proto", fileDescriptor_03b13225aaadc668) }
 
 var fileDescriptor_03b13225aaadc668 = []byte{
-	// 431 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xcd, 0x49, 0x2c, 0xcd,
-	0x4b, 0xce, 0x28, 0x48, 0x4c, 0xd1, 0x2f, 0x33, 0x4c, 0x4a, 0x2d, 0x49, 0x34, 0xd4, 0x2f, 0x2c,
-	0x4d, 0x2d, 0xaa, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x12, 0x84, 0x4b, 0xeb, 0x41, 0xa5,
-	0xa5, 0x64, 0xd2, 0xf3, 0xf3, 0xd3, 0x73, 0x52, 0xf5, 0x13, 0x0b, 0x32, 0xf5, 0x13, 0xf3, 0xf2,
-	0xf2, 0x4b, 0x12, 0x4b, 0x32, 0xf3, 0xf3, 0x8a, 0x21, 0x1a, 0xa4, 0xb4, 0x92, 0xf3, 0x8b, 0x73,
-	0xf3, 0x8b, 0xf5, 0x93, 0x12, 0x8b, 0x53, 0x21, 0x26, 0xc1, 0xcd, 0x2d, 0x48, 0x4c, 0xcf, 0xcc,
-	0x03, 0x2b, 0x86, 0xaa, 0x55, 0xc4, 0xb4, 0x1b, 0x61, 0x1d, 0x58, 0x89, 0x92, 0x16, 0x97, 0x44,
-	0x20, 0xc8, 0x10, 0xf7, 0xd4, 0x12, 0x1f, 0x98, 0x54, 0x50, 0x6a, 0x61, 0x69, 0x6a, 0x71, 0x89,
-	0x10, 0x1f, 0x17, 0x53, 0x66, 0x8a, 0x04, 0xa3, 0x02, 0xa3, 0x06, 0x4b, 0x10, 0x53, 0x66, 0x8a,
-	0x52, 0x38, 0x97, 0x24, 0x16, 0xb5, 0xc5, 0x05, 0xf9, 0x79, 0xc5, 0xa9, 0x42, 0x56, 0x5c, 0x9c,
-	0x70, 0xb3, 0xc1, 0x7a, 0xb8, 0x8d, 0x64, 0xf4, 0x30, 0x3c, 0xa7, 0x87, 0xd0, 0x88, 0x50, 0xae,
-	0x94, 0x04, 0x75, 0x84, 0x63, 0x4e, 0x0e, 0x86, 0x23, 0xdc, 0xb8, 0xb8, 0x10, 0xfe, 0x82, 0x1a,
-	0xac, 0xa6, 0x07, 0x09, 0x04, 0x3d, 0x50, 0x20, 0xe8, 0x41, 0x82, 0x13, 0x66, 0x41, 0x40, 0x62,
-	0x7a, 0x2a, 0x54, 0x6f, 0x10, 0x92, 0x4e, 0xa5, 0x45, 0x8c, 0x50, 0xd7, 0xa3, 0x5a, 0x02, 0x75,
-	0xbd, 0x0d, 0x17, 0x17, 0xdc, 0x39, 0xc5, 0x12, 0x8c, 0x0a, 0xcc, 0x04, 0x9d, 0x8f, 0xa4, 0x5e,
-	0xc8, 0x1d, 0xc5, 0x8d, 0x4c, 0x60, 0x37, 0xaa, 0x13, 0x74, 0x23, 0xc4, 0x6a, 0x64, 0x47, 0x1a,
-	0xdd, 0x62, 0xe2, 0x62, 0x05, 0x3b, 0x52, 0x68, 0x39, 0x23, 0x17, 0x27, 0xdc, 0x32, 0x21, 0x6d,
-	0x2c, 0x4e, 0xc1, 0x15, 0x6d, 0x52, 0x3a, 0xc4, 0x29, 0x86, 0x58, 0xaf, 0x64, 0xdf, 0x74, 0xf9,
-	0xc9, 0x64, 0x26, 0x4b, 0x21, 0x73, 0x7d, 0xc7, 0xd2, 0x92, 0xfc, 0xbc, 0xfc, 0xdc, 0x4a, 0xbf,
-	0xd4, 0x92, 0xf2, 0xfc, 0xa2, 0x6c, 0xfd, 0x44, 0x28, 0x3f, 0x39, 0x23, 0x31, 0x33, 0x0f, 0x91,
-	0x70, 0x90, 0x58, 0xd5, 0x99, 0x29, 0xb5, 0x42, 0xcb, 0x18, 0xb9, 0x78, 0xe0, 0xc6, 0x3a, 0xe6,
-	0xe4, 0xe0, 0x76, 0x2c, 0x96, 0xe8, 0xc5, 0xed, 0x58, 0x6c, 0xd1, 0xa4, 0x64, 0x0d, 0x76, 0xac,
-	0xa9, 0x90, 0x31, 0xe9, 0x8e, 0x2d, 0x76, 0x0a, 0x3d, 0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39,
-	0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58, 0x8e, 0xe1, 0xc6, 0x63,
-	0x39, 0x86, 0x28, 0xeb, 0xf4, 0xcc, 0x92, 0x8c, 0xd2, 0x24, 0xbd, 0xe4, 0xfc, 0x5c, 0x9c, 0x06,
-	0xeb, 0x42, 0x4c, 0xae, 0x40, 0x32, 0xbb, 0xa4, 0xb2, 0x20, 0xb5, 0x38, 0x89, 0x0d, 0x9c, 0x91,
-	0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x56, 0x50, 0x72, 0xaa, 0xe9, 0x03, 0x00, 0x00,
+	// 616 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x95, 0x4d, 0x6b, 0x13, 0x41,
+	0x18, 0xc7, 0x33, 0xf1, 0x05, 0x3b, 0x4a, 0xb1, 0x73, 0x8a, 0xdb, 0x64, 0xa9, 0x7b, 0x50, 0xa9,
+	0x76, 0x37, 0x2f, 0xf8, 0x52, 0x2b, 0x48, 0x14, 0xda, 0x8b, 0x88, 0x46, 0x44, 0x28, 0x7a, 0x98,
+	0x6c, 0xc6, 0x64, 0x70, 0xb3, 0xb3, 0xcd, 0xcc, 0x56, 0x83, 0x78, 0xf1, 0x13, 0x08, 0xde, 0x3c,
+	0x0a, 0xea, 0xc9, 0x83, 0xdf, 0xc2, 0x63, 0xc1, 0x8b, 0x47, 0x49, 0xfc, 0x20, 0xd2, 0xd9, 0xc9,
+	0x6e, 0x92, 0xdd, 0xb1, 0xab, 0xe4, 0xd6, 0xf2, 0x3c, 0xcf, 0xff, 0xf9, 0x3d, 0x7f, 0xe6, 0xbf,
+	0x81, 0x15, 0x0f, 0x87, 0xbe, 0xdb, 0x0b, 0x70, 0xc7, 0xd9, 0xaf, 0xb5, 0x89, 0xc0, 0x35, 0x67,
+	0x2f, 0x24, 0x83, 0xa1, 0x1d, 0x0c, 0x98, 0x60, 0x68, 0x25, 0x2e, 0xdb, 0xaa, 0x6c, 0x94, 0xbb,
+	0x8c, 0x75, 0x3d, 0xe2, 0xe0, 0x80, 0x3a, 0xd8, 0xf7, 0x99, 0xc0, 0x82, 0x32, 0x9f, 0x47, 0x03,
+	0xc6, 0xba, 0xcb, 0x78, 0x9f, 0x71, 0xa7, 0x8d, 0x39, 0x89, 0x94, 0x62, 0xdd, 0x00, 0x77, 0xa9,
+	0x2f, 0x9b, 0x55, 0xef, 0xf9, 0xf4, 0xee, 0x64, 0x9d, 0x6c, 0xb1, 0xd6, 0x61, 0xe9, 0xe1, 0xa1,
+	0xc8, 0x0e, 0x11, 0xf7, 0x26, 0xa5, 0x16, 0xd9, 0x0b, 0x09, 0x17, 0x68, 0x19, 0x16, 0x69, 0xa7,
+	0x04, 0xd6, 0xc0, 0xa5, 0xe3, 0xad, 0x22, 0xed, 0x58, 0x4f, 0xe0, 0xb9, 0x8c, 0x5e, 0x1e, 0x30,
+	0x9f, 0x13, 0x74, 0x13, 0x2e, 0xc5, 0xda, 0x72, 0xe6, 0x74, 0xbd, 0x6c, 0xa7, 0x8e, 0xb3, 0x93,
+	0xc1, 0xa4, 0xdd, 0x6a, 0x2b, 0x88, 0xa6, 0xe7, 0xa5, 0x20, 0xb6, 0x21, 0x4c, 0xee, 0x52, 0xc2,
+	0x17, 0xec, 0xc8, 0x04, 0xfb, 0xd0, 0x04, 0x3b, 0xb2, 0x73, 0xb2, 0xe0, 0x01, 0xee, 0x12, 0x35,
+	0xdb, 0x9a, 0x9a, 0xb4, 0x3e, 0x02, 0x45, 0x3f, 0xbb, 0x44, 0xd1, 0xdf, 0x82, 0x30, 0xc6, 0xe1,
+	0x25, 0xb0, 0x76, 0xec, 0x48, 0xfc, 0xa9, 0x7e, 0xb4, 0x33, 0xc3, 0x58, 0x94, 0x8c, 0x17, 0x8f,
+	0x64, 0x8c, 0x56, 0xcf, 0x40, 0x9a, 0xb0, 0x2c, 0x19, 0xef, 0x0e, 0x08, 0x16, 0xa4, 0x33, 0x6f,
+	0x86, 0xf5, 0x0c, 0x56, 0x34, 0xf5, 0x45, 0xdc, 0x61, 0x55, 0xe0, 0x6a, 0x64, 0x91, 0x2b, 0xe8,
+	0x3e, 0x49, 0x6d, 0x7f, 0xaa, 0xe8, 0x52, 0xe5, 0x85, 0x2c, 0x9f, 0xdc, 0xfe, 0x28, 0x74, 0x5d,
+	0xc2, 0xb9, 0xf6, 0xf6, 0x74, 0x7d, 0x21, 0xeb, 0x57, 0xd5, 0xf3, 0xd8, 0xc6, 0x34, 0xf5, 0x08,
+	0xad, 0x5d, 0x68, 0x64, 0x15, 0x17, 0xb1, 0xb8, 0xfe, 0xe1, 0x14, 0x3c, 0x21, 0xc5, 0xd1, 0x17,
+	0x00, 0x97, 0xe2, 0x1e, 0x74, 0x39, 0x43, 0x41, 0x17, 0x55, 0xe3, 0x4a, 0xbe, 0xe6, 0x08, 0xd8,
+	0xba, 0xfd, 0xf6, 0xc7, 0xef, 0xf7, 0xc5, 0x4d, 0x74, 0xdd, 0x69, 0x86, 0x82, 0xf9, 0xac, 0x3f,
+	0xbc, 0x4f, 0xc4, 0x4b, 0x36, 0x78, 0xe1, 0x60, 0xf5, 0xbf, 0xdb, 0xc3, 0xd4, 0x4f, 0x3e, 0x16,
+	0x53, 0x7f, 0xbd, 0xa6, 0x9d, 0x37, 0xe8, 0x33, 0x80, 0x67, 0x62, 0xd9, 0xa6, 0xe7, 0xe9, 0x61,
+	0x33, 0x22, 0xad, 0x87, 0xcd, 0x8a, 0xa6, 0xb5, 0x25, 0x61, 0xaf, 0xa2, 0xc6, 0xbf, 0xc3, 0x72,
+	0xf4, 0x0d, 0xc0, 0x95, 0xf9, 0xb0, 0x70, 0xe4, 0xe8, 0x00, 0x34, 0xb9, 0x33, 0xaa, 0xf9, 0x07,
+	0x14, 0xf5, 0xa6, 0xa4, 0x6e, 0xa0, 0x5a, 0x5e, 0x6a, 0xee, 0xb8, 0x91, 0x16, 0xfa, 0x0a, 0xe0,
+	0xd9, 0xb9, 0x88, 0x71, 0x64, 0x6b, 0x3d, 0xcb, 0xcc, 0xaa, 0xe1, 0xe4, 0xee, 0x57, 0xc0, 0x37,
+	0x24, 0x70, 0x1d, 0x55, 0xf3, 0x03, 0x63, 0x29, 0x25, 0x3d, 0x9e, 0x0f, 0xe5, 0x5f, 0x3c, 0xd6,
+	0xe4, 0x5b, 0xef, 0xb1, 0x2e, 0xf0, 0xff, 0xe3, 0x31, 0x8f, 0xb4, 0xd0, 0x27, 0x00, 0x97, 0x67,
+	0xc2, 0xcc, 0x91, 0xf6, 0x55, 0x66, 0x7d, 0x11, 0x8c, 0x8d, 0x9c, 0xdd, 0x0a, 0xf5, 0x9a, 0x44,
+	0xad, 0x22, 0x3b, 0x3f, 0xea, 0x73, 0x4c, 0xbd, 0x3b, 0x8f, 0xbf, 0x8f, 0x4c, 0x70, 0x30, 0x32,
+	0xc1, 0xaf, 0x91, 0x09, 0xde, 0x8d, 0xcd, 0xc2, 0xc1, 0xd8, 0x2c, 0xfc, 0x1c, 0x9b, 0x85, 0xdd,
+	0xad, 0x2e, 0x15, 0xbd, 0xb0, 0x6d, 0xbb, 0xac, 0xaf, 0xd5, 0xdc, 0x88, 0x44, 0x5f, 0x4d, 0x65,
+	0x43, 0x0c, 0x03, 0xc2, 0xdb, 0x27, 0xe5, 0x8f, 0x7f, 0xe3, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff,
+	0x7e, 0x52, 0x6d, 0x33, 0x9d, 0x08, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -270,6 +610,10 @@ type QueryClient interface {
 	Launchpad(ctx context.Context, in *QueryGetLaunchpadRequest, opts ...grpc.CallOption) (*QueryGetLaunchpadResponse, error)
 	// Queries a list of launchpad items.
 	LaunchpadAll(ctx context.Context, in *QueryAllLaunchpadRequest, opts ...grpc.CallOption) (*QueryAllLaunchpadResponse, error)
+	CreatedLaunchpads(ctx context.Context, in *QueryCreatedLaunchpadRequest, opts ...grpc.CallOption) (*QueryCreatedLaunchpadResponse, error)
+	ActiveLaunchpads(ctx context.Context, in *QueryActiveLaunchpadRequest, opts ...grpc.CallOption) (*QueryActiveLaunchpadResponse, error)
+	SuccessLaunchpads(ctx context.Context, in *QuerySuccessLaunchpadRequest, opts ...grpc.CallOption) (*QuerySuccessLaunchpadResponse, error)
+	FailLaunchpads(ctx context.Context, in *QueryFailLaunchpadRequest, opts ...grpc.CallOption) (*QueryFailLaunchpadResponse, error)
 }
 
 type queryClient struct {
@@ -298,12 +642,52 @@ func (c *queryClient) LaunchpadAll(ctx context.Context, in *QueryAllLaunchpadReq
 	return out, nil
 }
 
+func (c *queryClient) CreatedLaunchpads(ctx context.Context, in *QueryCreatedLaunchpadRequest, opts ...grpc.CallOption) (*QueryCreatedLaunchpadResponse, error) {
+	out := new(QueryCreatedLaunchpadResponse)
+	err := c.cc.Invoke(ctx, "/launchpad.v1beta1.Query/CreatedLaunchpads", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ActiveLaunchpads(ctx context.Context, in *QueryActiveLaunchpadRequest, opts ...grpc.CallOption) (*QueryActiveLaunchpadResponse, error) {
+	out := new(QueryActiveLaunchpadResponse)
+	err := c.cc.Invoke(ctx, "/launchpad.v1beta1.Query/ActiveLaunchpads", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) SuccessLaunchpads(ctx context.Context, in *QuerySuccessLaunchpadRequest, opts ...grpc.CallOption) (*QuerySuccessLaunchpadResponse, error) {
+	out := new(QuerySuccessLaunchpadResponse)
+	err := c.cc.Invoke(ctx, "/launchpad.v1beta1.Query/SuccessLaunchpads", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) FailLaunchpads(ctx context.Context, in *QueryFailLaunchpadRequest, opts ...grpc.CallOption) (*QueryFailLaunchpadResponse, error) {
+	out := new(QueryFailLaunchpadResponse)
+	err := c.cc.Invoke(ctx, "/launchpad.v1beta1.Query/FailLaunchpads", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Queries a launchpad by id.
 	Launchpad(context.Context, *QueryGetLaunchpadRequest) (*QueryGetLaunchpadResponse, error)
 	// Queries a list of launchpad items.
 	LaunchpadAll(context.Context, *QueryAllLaunchpadRequest) (*QueryAllLaunchpadResponse, error)
+	CreatedLaunchpads(context.Context, *QueryCreatedLaunchpadRequest) (*QueryCreatedLaunchpadResponse, error)
+	ActiveLaunchpads(context.Context, *QueryActiveLaunchpadRequest) (*QueryActiveLaunchpadResponse, error)
+	SuccessLaunchpads(context.Context, *QuerySuccessLaunchpadRequest) (*QuerySuccessLaunchpadResponse, error)
+	FailLaunchpads(context.Context, *QueryFailLaunchpadRequest) (*QueryFailLaunchpadResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -315,6 +699,18 @@ func (*UnimplementedQueryServer) Launchpad(ctx context.Context, req *QueryGetLau
 }
 func (*UnimplementedQueryServer) LaunchpadAll(ctx context.Context, req *QueryAllLaunchpadRequest) (*QueryAllLaunchpadResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LaunchpadAll not implemented")
+}
+func (*UnimplementedQueryServer) CreatedLaunchpads(ctx context.Context, req *QueryCreatedLaunchpadRequest) (*QueryCreatedLaunchpadResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatedLaunchpads not implemented")
+}
+func (*UnimplementedQueryServer) ActiveLaunchpads(ctx context.Context, req *QueryActiveLaunchpadRequest) (*QueryActiveLaunchpadResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ActiveLaunchpads not implemented")
+}
+func (*UnimplementedQueryServer) SuccessLaunchpads(ctx context.Context, req *QuerySuccessLaunchpadRequest) (*QuerySuccessLaunchpadResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SuccessLaunchpads not implemented")
+}
+func (*UnimplementedQueryServer) FailLaunchpads(ctx context.Context, req *QueryFailLaunchpadRequest) (*QueryFailLaunchpadResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FailLaunchpads not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -357,6 +753,78 @@ func _Query_LaunchpadAll_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_CreatedLaunchpads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCreatedLaunchpadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).CreatedLaunchpads(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/launchpad.v1beta1.Query/CreatedLaunchpads",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).CreatedLaunchpads(ctx, req.(*QueryCreatedLaunchpadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ActiveLaunchpads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryActiveLaunchpadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ActiveLaunchpads(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/launchpad.v1beta1.Query/ActiveLaunchpads",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ActiveLaunchpads(ctx, req.(*QueryActiveLaunchpadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_SuccessLaunchpads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySuccessLaunchpadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).SuccessLaunchpads(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/launchpad.v1beta1.Query/SuccessLaunchpads",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).SuccessLaunchpads(ctx, req.(*QuerySuccessLaunchpadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_FailLaunchpads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryFailLaunchpadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).FailLaunchpads(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/launchpad.v1beta1.Query/FailLaunchpads",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).FailLaunchpads(ctx, req.(*QueryFailLaunchpadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "launchpad.v1beta1.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -368,6 +836,22 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LaunchpadAll",
 			Handler:    _Query_LaunchpadAll_Handler,
+		},
+		{
+			MethodName: "CreatedLaunchpads",
+			Handler:    _Query_CreatedLaunchpads_Handler,
+		},
+		{
+			MethodName: "ActiveLaunchpads",
+			Handler:    _Query_ActiveLaunchpads_Handler,
+		},
+		{
+			MethodName: "SuccessLaunchpads",
+			Handler:    _Query_SuccessLaunchpads_Handler,
+		},
+		{
+			MethodName: "FailLaunchpads",
+			Handler:    _Query_FailLaunchpads_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -521,6 +1005,246 @@ func (m *QueryAllLaunchpadResponse) MarshalToSizedBuffer(dAtA []byte) (int, erro
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryCreatedLaunchpadRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryCreatedLaunchpadRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryCreatedLaunchpadRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryCreatedLaunchpadResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryCreatedLaunchpadResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryCreatedLaunchpadResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Launchpads) > 0 {
+		for iNdEx := len(m.Launchpads) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Launchpads[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryActiveLaunchpadRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryActiveLaunchpadRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryActiveLaunchpadRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryActiveLaunchpadResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryActiveLaunchpadResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryActiveLaunchpadResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Launchpads) > 0 {
+		for iNdEx := len(m.Launchpads) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Launchpads[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QuerySuccessLaunchpadRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QuerySuccessLaunchpadRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QuerySuccessLaunchpadRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *QuerySuccessLaunchpadResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QuerySuccessLaunchpadResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QuerySuccessLaunchpadResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Launchpads) > 0 {
+		for iNdEx := len(m.Launchpads) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Launchpads[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryFailLaunchpadRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryFailLaunchpadRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryFailLaunchpadRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryFailLaunchpadResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryFailLaunchpadResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryFailLaunchpadResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Launchpads) > 0 {
+		for iNdEx := len(m.Launchpads) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Launchpads[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -585,6 +1309,102 @@ func (m *QueryAllLaunchpadResponse) Size() (n int) {
 	if m.Pagination != nil {
 		l = m.Pagination.Size()
 		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryCreatedLaunchpadRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *QueryCreatedLaunchpadResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Launchpads) > 0 {
+		for _, e := range m.Launchpads {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *QueryActiveLaunchpadRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *QueryActiveLaunchpadResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Launchpads) > 0 {
+		for _, e := range m.Launchpads {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *QuerySuccessLaunchpadRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *QuerySuccessLaunchpadResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Launchpads) > 0 {
+		for _, e := range m.Launchpads {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *QueryFailLaunchpadRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *QueryFailLaunchpadResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Launchpads) > 0 {
+		for _, e := range m.Launchpads {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
 	}
 	return n
 }
@@ -932,6 +1752,542 @@ func (m *QueryAllLaunchpadResponse) Unmarshal(dAtA []byte) error {
 				m.Pagination = &query.PageResponse{}
 			}
 			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryCreatedLaunchpadRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryCreatedLaunchpadRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryCreatedLaunchpadRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryCreatedLaunchpadResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryCreatedLaunchpadResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryCreatedLaunchpadResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Launchpads", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Launchpads = append(m.Launchpads, &Launchpad{})
+			if err := m.Launchpads[len(m.Launchpads)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryActiveLaunchpadRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryActiveLaunchpadRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryActiveLaunchpadRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryActiveLaunchpadResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryActiveLaunchpadResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryActiveLaunchpadResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Launchpads", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Launchpads = append(m.Launchpads, &Launchpad{})
+			if err := m.Launchpads[len(m.Launchpads)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QuerySuccessLaunchpadRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QuerySuccessLaunchpadRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QuerySuccessLaunchpadRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QuerySuccessLaunchpadResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QuerySuccessLaunchpadResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QuerySuccessLaunchpadResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Launchpads", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Launchpads = append(m.Launchpads, &Launchpad{})
+			if err := m.Launchpads[len(m.Launchpads)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryFailLaunchpadRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryFailLaunchpadRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryFailLaunchpadRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryFailLaunchpadResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryFailLaunchpadResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryFailLaunchpadResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Launchpads", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Launchpads = append(m.Launchpads, &Launchpad{})
+			if err := m.Launchpads[len(m.Launchpads)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

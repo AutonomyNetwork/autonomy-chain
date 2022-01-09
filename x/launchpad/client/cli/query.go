@@ -21,6 +21,10 @@ func GetQueryCmd(queryRoute string) *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdListLaunchpad())
+	cmd.AddCommand(CmdCreatedLaunchpads())
+	cmd.AddCommand(CmdActiveLaunchpads())
+	cmd.AddCommand(CmdSuccessLaunchpads())
+	cmd.AddCommand(CmdFailLaunchpads())
 	cmd.AddCommand(CmdShowLaunchpad())
 
 	return cmd
