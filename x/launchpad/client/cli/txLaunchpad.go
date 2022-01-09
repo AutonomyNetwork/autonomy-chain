@@ -31,13 +31,13 @@ func CmdCreateLaunchpad() *cobra.Command {
 				return fmt.Errorf("softcap shoud be less then hardcap")
 			}
 
-			// startTime, _ := cmd.Flags().GetString(FlagStartTime)
-			// endTime, _ := cmd.Flags().GetString(FlagHardCap)
+			startTime, _ := cmd.Flags().GetString(FlagStartTime)
+			endTime, _ := cmd.Flags().GetString(FlagHardCap)
 
-			str := "2014-11-12T11:45:26.371Z"
+			// str := "2014-11-12T11:45:26.371Z"
 
-			startTime := str
-			endTime := str
+			// startTime := str
+			// endTime := str
 
 			sTime, err := time.Parse(time.RFC3339, startTime)
 			if err != nil {

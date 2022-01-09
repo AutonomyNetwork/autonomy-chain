@@ -40,6 +40,7 @@ type Launchpad struct {
 	StartTime time.Time `protobuf:"bytes,7,opt,name=startTime,proto3,stdtime" json:"startTime"`
 	EndTime   time.Time `protobuf:"bytes,8,opt,name=endTime,proto3,stdtime" json:"endTime"`
 	Status    string    `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
+	Deposits  uint64    `protobuf:"varint,10,opt,name=deposits,proto3" json:"deposits,omitempty"`
 }
 
 func (m *Launchpad) Reset()         { *m = Launchpad{} }
@@ -75,6 +76,74 @@ func (m *Launchpad) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Launchpad proto.InternalMessageInfo
 
+type Launchpads struct {
+	CreatedLaunchpads []uint64 `protobuf:"varint,1,rep,packed,name=CreatedLaunchpads,proto3" json:"CreatedLaunchpads,omitempty"`
+	ActiveLaunchpads  []uint64 `protobuf:"varint,2,rep,packed,name=ActiveLaunchpads,proto3" json:"ActiveLaunchpads,omitempty"`
+	SuccessLaunchpads []uint64 `protobuf:"varint,3,rep,packed,name=SuccessLaunchpads,proto3" json:"SuccessLaunchpads,omitempty"`
+	FailLaunchpads    []uint64 `protobuf:"varint,4,rep,packed,name=FailLaunchpads,proto3" json:"FailLaunchpads,omitempty"`
+}
+
+func (m *Launchpads) Reset()         { *m = Launchpads{} }
+func (m *Launchpads) String() string { return proto.CompactTextString(m) }
+func (*Launchpads) ProtoMessage()    {}
+func (*Launchpads) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8919382d78c3e36, []int{1}
+}
+func (m *Launchpads) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Launchpads) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Launchpads.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Launchpads) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Launchpads.Merge(m, src)
+}
+func (m *Launchpads) XXX_Size() int {
+	return m.Size()
+}
+func (m *Launchpads) XXX_DiscardUnknown() {
+	xxx_messageInfo_Launchpads.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Launchpads proto.InternalMessageInfo
+
+func (m *Launchpads) GetCreatedLaunchpads() []uint64 {
+	if m != nil {
+		return m.CreatedLaunchpads
+	}
+	return nil
+}
+
+func (m *Launchpads) GetActiveLaunchpads() []uint64 {
+	if m != nil {
+		return m.ActiveLaunchpads
+	}
+	return nil
+}
+
+func (m *Launchpads) GetSuccessLaunchpads() []uint64 {
+	if m != nil {
+		return m.SuccessLaunchpads
+	}
+	return nil
+}
+
+func (m *Launchpads) GetFailLaunchpads() []uint64 {
+	if m != nil {
+		return m.FailLaunchpads
+	}
+	return nil
+}
+
 type DepositToLaunchpad struct {
 	Id        uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Depositor string     `protobuf:"bytes,2,opt,name=depositor,proto3" json:"depositor,omitempty"`
@@ -85,7 +154,7 @@ func (m *DepositToLaunchpad) Reset()         { *m = DepositToLaunchpad{} }
 func (m *DepositToLaunchpad) String() string { return proto.CompactTextString(m) }
 func (*DepositToLaunchpad) ProtoMessage()    {}
 func (*DepositToLaunchpad) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8919382d78c3e36, []int{1}
+	return fileDescriptor_a8919382d78c3e36, []int{2}
 }
 func (m *DepositToLaunchpad) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -116,41 +185,48 @@ var xxx_messageInfo_DepositToLaunchpad proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*Launchpad)(nil), "launchpad.v1beta1.Launchpad")
+	proto.RegisterType((*Launchpads)(nil), "launchpad.v1beta1.Launchpads")
 	proto.RegisterType((*DepositToLaunchpad)(nil), "launchpad.v1beta1.DepositToLaunchpad")
 }
 
 func init() { proto.RegisterFile("launchpad/v1beta1/launchpad.proto", fileDescriptor_a8919382d78c3e36) }
 
 var fileDescriptor_a8919382d78c3e36 = []byte{
-	// 448 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0xb1, 0x8e, 0xd3, 0x40,
-	0x10, 0x86, 0xbd, 0x21, 0x24, 0xf1, 0x9e, 0x84, 0x84, 0x85, 0x90, 0x2f, 0x42, 0x76, 0xb8, 0x2a,
-	0x0d, 0x5e, 0xdd, 0x51, 0x20, 0x81, 0x84, 0x44, 0xa0, 0x41, 0x42, 0x14, 0x51, 0x68, 0x68, 0xd0,
-	0xda, 0xde, 0x73, 0x56, 0x89, 0x77, 0x2c, 0xef, 0x18, 0xc8, 0x03, 0x20, 0x51, 0xde, 0x23, 0xdc,
-	0xab, 0xd0, 0x5d, 0x79, 0x25, 0x15, 0xa0, 0xa4, 0xe1, 0x31, 0x90, 0xd7, 0x6b, 0xbb, 0x00, 0x8a,
-	0xeb, 0xfc, 0xcf, 0xf7, 0xcf, 0xee, 0xf8, 0xdf, 0xa1, 0x0f, 0xb7, 0xbc, 0x52, 0xc9, 0xba, 0xe0,
-	0x29, 0xfb, 0x78, 0x1a, 0x0b, 0xe4, 0xa7, 0xac, 0xab, 0x44, 0x45, 0x09, 0x08, 0xde, 0xdd, 0xbe,
-	0x60, 0x2d, 0xd3, 0x7b, 0x19, 0x64, 0x60, 0x28, 0xab, 0xbf, 0x1a, 0xe3, 0x34, 0xcc, 0x00, 0xb2,
-	0xad, 0x60, 0x46, 0xc5, 0xd5, 0x39, 0x43, 0x99, 0x0b, 0x8d, 0x3c, 0x2f, 0xac, 0x21, 0x48, 0x40,
-	0xe7, 0xa0, 0x59, 0xcc, 0xb5, 0xe8, 0xae, 0x4b, 0x40, 0xaa, 0xbf, 0xb8, 0xda, 0x74, 0xbc, 0x16,
-	0x96, 0x1f, 0x37, 0xfc, 0x43, 0x73, 0x73, 0x23, 0x2c, 0xfa, 0xe7, 0x44, 0x27, 0xdf, 0x06, 0xd4,
-	0x7d, 0xd3, 0x4e, 0xef, 0xdd, 0xa1, 0x03, 0x99, 0xfa, 0x64, 0x46, 0xe6, 0xc3, 0xe5, 0x40, 0xa6,
-	0x9e, 0x4f, 0xc7, 0x49, 0x29, 0x38, 0x42, 0xe9, 0x0f, 0x66, 0x64, 0xee, 0x2e, 0x5b, 0x59, 0x13,
-	0x84, 0x8d, 0x50, 0xaf, 0x53, 0xff, 0x96, 0xb1, 0xb7, 0xd2, 0xbb, 0x4f, 0x47, 0xba, 0x2a, 0x8a,
-	0xed, 0xce, 0x1f, 0x1a, 0x60, 0x55, 0xdd, 0xa1, 0xe1, 0x1c, 0x13, 0x5e, 0xf8, 0xb7, 0x9b, 0x0e,
-	0x2b, 0x6b, 0xb2, 0xe6, 0x65, 0x5a, 0x93, 0x51, 0x43, 0xac, 0xf4, 0x16, 0xd4, 0xd5, 0xc8, 0x4b,
-	0x5c, 0xc9, 0x5c, 0xf8, 0xe3, 0x19, 0x99, 0x1f, 0x9d, 0x4d, 0xa3, 0x26, 0xc3, 0xa8, 0xcd, 0x30,
-	0x5a, 0xb5, 0x19, 0x2e, 0x26, 0x57, 0x3f, 0x42, 0xe7, 0xe2, 0x67, 0x48, 0x96, 0x7d, 0x9b, 0xf7,
-	0x9c, 0x8e, 0x85, 0x4a, 0xcd, 0x09, 0x93, 0x1b, 0x9c, 0xd0, 0x36, 0x99, 0xff, 0x41, 0x8e, 0x95,
-	0xf6, 0x5d, 0x13, 0x81, 0x55, 0x4f, 0x27, 0x5f, 0x2f, 0x43, 0xe7, 0xf7, 0x65, 0xe8, 0x9c, 0x7c,
-	0x21, 0xd4, 0x7b, 0x25, 0x0a, 0xd0, 0x12, 0x57, 0xf0, 0xff, 0x30, 0x1f, 0x50, 0x37, 0x6d, 0x5c,
-	0x5d, 0x9c, 0x7d, 0xc1, 0x7b, 0x42, 0x47, 0x3c, 0x87, 0x4a, 0xa1, 0xc9, 0xf3, 0xe8, 0xec, 0x38,
-	0xb2, 0xaf, 0x57, 0xaf, 0x42, 0xbb, 0x56, 0xd1, 0x4b, 0x90, 0x6a, 0x31, 0xac, 0x87, 0x5c, 0x5a,
-	0x7b, 0x3f, 0xc7, 0xe2, 0xdd, 0xd5, 0x3e, 0x20, 0xd7, 0xfb, 0x80, 0xfc, 0xda, 0x07, 0xe4, 0xe2,
-	0x10, 0x38, 0xd7, 0x87, 0xc0, 0xf9, 0x7e, 0x08, 0x9c, 0xf7, 0xcf, 0x32, 0x89, 0xeb, 0x2a, 0x8e,
-	0x12, 0xc8, 0xd9, 0x8b, 0x0a, 0x41, 0x41, 0xbe, 0x7b, 0x2b, 0xf0, 0x13, 0x94, 0x1b, 0xc6, 0xad,
-	0x7e, 0x94, 0xac, 0xb9, 0x54, 0xec, 0x73, 0xbf, 0xdd, 0x0c, 0x77, 0x85, 0xd0, 0xf1, 0xc8, 0xe4,
-	0xf4, 0xf8, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xdf, 0x83, 0xfb, 0x4e, 0x09, 0x03, 0x00, 0x00,
+	// 530 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x93, 0x4f, 0x8b, 0xd3, 0x40,
+	0x18, 0xc6, 0x33, 0x6d, 0xed, 0x9f, 0x59, 0x58, 0xdc, 0x41, 0x24, 0x5b, 0x24, 0xad, 0x3d, 0x48,
+	0x11, 0x4d, 0xd8, 0xf5, 0x20, 0x28, 0x08, 0xdb, 0x15, 0x41, 0x10, 0x0f, 0xb5, 0x5e, 0xbc, 0xc8,
+	0x74, 0x32, 0xdb, 0x0e, 0x6d, 0xf2, 0x86, 0xcc, 0x64, 0xb5, 0x1f, 0x40, 0xf0, 0xb8, 0x1f, 0x61,
+	0x3f, 0x88, 0x1f, 0x60, 0x8f, 0x7b, 0xf4, 0xe2, 0x1f, 0xda, 0x8b, 0x1f, 0x43, 0x66, 0x32, 0x49,
+	0x8a, 0xd5, 0x83, 0xb7, 0x3c, 0xef, 0xef, 0x79, 0xdf, 0xcc, 0x3c, 0xbc, 0x83, 0xef, 0x2e, 0x69,
+	0x16, 0xb3, 0x79, 0x42, 0xc3, 0xe0, 0xfc, 0x68, 0xca, 0x15, 0x3d, 0x0a, 0xca, 0x8a, 0x9f, 0xa4,
+	0xa0, 0x80, 0x1c, 0x54, 0x05, 0x6b, 0xe9, 0xde, 0x9a, 0xc1, 0x0c, 0x0c, 0x0d, 0xf4, 0x57, 0x6e,
+	0xec, 0xf6, 0x66, 0x00, 0xb3, 0x25, 0x0f, 0x8c, 0x9a, 0x66, 0x67, 0x81, 0x12, 0x11, 0x97, 0x8a,
+	0x46, 0x89, 0x35, 0x78, 0x0c, 0x64, 0x04, 0x32, 0x98, 0x52, 0xc9, 0xcb, 0xdf, 0x31, 0x10, 0xf1,
+	0x0e, 0x8f, 0x17, 0x25, 0xd7, 0xc2, 0xf2, 0xc3, 0x9c, 0xbf, 0xcf, 0xff, 0x9c, 0x0b, 0x8b, 0xfe,
+	0x7a, 0xa2, 0xc1, 0xb7, 0x1a, 0xee, 0xbc, 0x2a, 0x4e, 0x4f, 0xf6, 0x71, 0x4d, 0x84, 0x2e, 0xea,
+	0xa3, 0x61, 0x63, 0x5c, 0x13, 0x21, 0x71, 0x71, 0x8b, 0xa5, 0x9c, 0x2a, 0x48, 0xdd, 0x5a, 0x1f,
+	0x0d, 0x3b, 0xe3, 0x42, 0x6a, 0xa2, 0x60, 0xc1, 0xe3, 0x97, 0xa1, 0x5b, 0x37, 0xf6, 0x42, 0x92,
+	0xdb, 0xb8, 0x29, 0xb3, 0x24, 0x59, 0xae, 0xdc, 0x86, 0x01, 0x56, 0xe9, 0x0e, 0x09, 0x67, 0x8a,
+	0xd1, 0xc4, 0xbd, 0x91, 0x77, 0x58, 0xa9, 0xc9, 0x9c, 0xa6, 0xa1, 0x26, 0xcd, 0x9c, 0x58, 0x49,
+	0x46, 0xb8, 0x23, 0x15, 0x4d, 0xd5, 0x44, 0x44, 0xdc, 0x6d, 0xf5, 0xd1, 0x70, 0xef, 0xb8, 0xeb,
+	0xe7, 0x19, 0xfa, 0x45, 0x86, 0xfe, 0xa4, 0xc8, 0x70, 0xd4, 0xbe, 0xfa, 0xde, 0x73, 0x2e, 0x7e,
+	0xf4, 0xd0, 0xb8, 0x6a, 0x23, 0xcf, 0x70, 0x8b, 0xc7, 0xa1, 0x99, 0xd0, 0xfe, 0x8f, 0x09, 0x45,
+	0x93, 0xb9, 0x8f, 0xa2, 0x2a, 0x93, 0x6e, 0xc7, 0x44, 0x60, 0x15, 0xe9, 0xe2, 0x76, 0xc8, 0x13,
+	0x90, 0x42, 0x49, 0x17, 0x9b, 0x63, 0x97, 0xfa, 0x49, 0xfb, 0xf3, 0x65, 0xcf, 0xf9, 0x75, 0xd9,
+	0x73, 0x06, 0x5f, 0x10, 0xc6, 0x65, 0xbe, 0x92, 0x3c, 0xc0, 0x07, 0xa7, 0x3a, 0x41, 0x1e, 0x56,
+	0x45, 0x17, 0xf5, 0xeb, 0xc3, 0xc6, 0x78, 0x17, 0x90, 0xfb, 0xf8, 0xe6, 0x09, 0x53, 0xe2, 0x9c,
+	0x6f, 0x99, 0x6b, 0xc6, 0xbc, 0x53, 0xd7, 0x93, 0xdf, 0x64, 0x8c, 0x71, 0x29, 0xb7, 0xcc, 0xf5,
+	0x7c, 0xf2, 0x0e, 0x20, 0xf7, 0xf0, 0xfe, 0x0b, 0x2a, 0x96, 0x5b, 0xd6, 0x86, 0xb1, 0xfe, 0x51,
+	0x1d, 0x7c, 0x42, 0x98, 0x3c, 0xcf, 0x6f, 0x35, 0x81, 0x7f, 0xef, 0xc9, 0x1d, 0xdc, 0xb1, 0x77,
+	0x2f, 0x37, 0xa5, 0x2a, 0x90, 0xc7, 0xb8, 0x49, 0x23, 0xc8, 0x62, 0x65, 0x56, 0x65, 0xef, 0xf8,
+	0xd0, 0xb7, 0x8b, 0xa9, 0xb7, 0xbc, 0x78, 0x31, 0xfe, 0x29, 0x88, 0x78, 0xd4, 0xd0, 0xf9, 0x8f,
+	0xad, 0xbd, 0x8a, 0x71, 0xf4, 0xf6, 0x6a, 0xed, 0xa1, 0xeb, 0xb5, 0x87, 0x7e, 0xae, 0x3d, 0x74,
+	0xb1, 0xf1, 0x9c, 0xeb, 0x8d, 0xe7, 0x7c, 0xdd, 0x78, 0xce, 0xbb, 0xa7, 0x33, 0xa1, 0xe6, 0xd9,
+	0xd4, 0x67, 0x10, 0x05, 0x27, 0x99, 0x82, 0x18, 0xa2, 0xd5, 0x6b, 0xae, 0x3e, 0x40, 0xba, 0x08,
+	0xa8, 0xd5, 0x0f, 0xd9, 0x9c, 0x8a, 0x38, 0xf8, 0x58, 0x3d, 0xdc, 0x40, 0xad, 0x12, 0x2e, 0xa7,
+	0x4d, 0xb3, 0x02, 0x8f, 0x7e, 0x07, 0x00, 0x00, 0xff, 0xff, 0x47, 0x3a, 0xff, 0x62, 0xe4, 0x03,
+	0x00, 0x00,
 }
 
 func (m *Launchpad) Marshal() (dAtA []byte, err error) {
@@ -173,6 +249,11 @@ func (m *Launchpad) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.Deposits != 0 {
+		i = encodeVarintLaunchpad(dAtA, i, uint64(m.Deposits))
+		i--
+		dAtA[i] = 0x50
+	}
 	if len(m.Status) > 0 {
 		i -= len(m.Status)
 		copy(dAtA[i:], m.Status)
@@ -227,6 +308,101 @@ func (m *Launchpad) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i = encodeVarintLaunchpad(dAtA, i, uint64(m.Id))
 		i--
 		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Launchpads) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Launchpads) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Launchpads) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.FailLaunchpads) > 0 {
+		dAtA4 := make([]byte, len(m.FailLaunchpads)*10)
+		var j3 int
+		for _, num := range m.FailLaunchpads {
+			for num >= 1<<7 {
+				dAtA4[j3] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j3++
+			}
+			dAtA4[j3] = uint8(num)
+			j3++
+		}
+		i -= j3
+		copy(dAtA[i:], dAtA4[:j3])
+		i = encodeVarintLaunchpad(dAtA, i, uint64(j3))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.SuccessLaunchpads) > 0 {
+		dAtA6 := make([]byte, len(m.SuccessLaunchpads)*10)
+		var j5 int
+		for _, num := range m.SuccessLaunchpads {
+			for num >= 1<<7 {
+				dAtA6[j5] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j5++
+			}
+			dAtA6[j5] = uint8(num)
+			j5++
+		}
+		i -= j5
+		copy(dAtA[i:], dAtA6[:j5])
+		i = encodeVarintLaunchpad(dAtA, i, uint64(j5))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.ActiveLaunchpads) > 0 {
+		dAtA8 := make([]byte, len(m.ActiveLaunchpads)*10)
+		var j7 int
+		for _, num := range m.ActiveLaunchpads {
+			for num >= 1<<7 {
+				dAtA8[j7] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j7++
+			}
+			dAtA8[j7] = uint8(num)
+			j7++
+		}
+		i -= j7
+		copy(dAtA[i:], dAtA8[:j7])
+		i = encodeVarintLaunchpad(dAtA, i, uint64(j7))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.CreatedLaunchpads) > 0 {
+		dAtA10 := make([]byte, len(m.CreatedLaunchpads)*10)
+		var j9 int
+		for _, num := range m.CreatedLaunchpads {
+			for num >= 1<<7 {
+				dAtA10[j9] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j9++
+			}
+			dAtA10[j9] = uint8(num)
+			j9++
+		}
+		i -= j9
+		copy(dAtA[i:], dAtA10[:j9])
+		i = encodeVarintLaunchpad(dAtA, i, uint64(j9))
+		i--
+		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
@@ -319,6 +495,46 @@ func (m *Launchpad) Size() (n int) {
 	l = len(m.Status)
 	if l > 0 {
 		n += 1 + l + sovLaunchpad(uint64(l))
+	}
+	if m.Deposits != 0 {
+		n += 1 + sovLaunchpad(uint64(m.Deposits))
+	}
+	return n
+}
+
+func (m *Launchpads) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.CreatedLaunchpads) > 0 {
+		l = 0
+		for _, e := range m.CreatedLaunchpads {
+			l += sovLaunchpad(uint64(e))
+		}
+		n += 1 + sovLaunchpad(uint64(l)) + l
+	}
+	if len(m.ActiveLaunchpads) > 0 {
+		l = 0
+		for _, e := range m.ActiveLaunchpads {
+			l += sovLaunchpad(uint64(e))
+		}
+		n += 1 + sovLaunchpad(uint64(l)) + l
+	}
+	if len(m.SuccessLaunchpads) > 0 {
+		l = 0
+		for _, e := range m.SuccessLaunchpads {
+			l += sovLaunchpad(uint64(e))
+		}
+		n += 1 + sovLaunchpad(uint64(l)) + l
+	}
+	if len(m.FailLaunchpads) > 0 {
+		l = 0
+		for _, e := range m.FailLaunchpads {
+			l += sovLaunchpad(uint64(e))
+		}
+		n += 1 + sovLaunchpad(uint64(l)) + l
 	}
 	return n
 }
@@ -601,6 +817,379 @@ func (m *Launchpad) Unmarshal(dAtA []byte) error {
 			}
 			m.Status = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Deposits", wireType)
+			}
+			m.Deposits = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowLaunchpad
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Deposits |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipLaunchpad(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthLaunchpad
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Launchpads) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowLaunchpad
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Launchpads: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Launchpads: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType == 0 {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowLaunchpad
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.CreatedLaunchpads = append(m.CreatedLaunchpads, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowLaunchpad
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthLaunchpad
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthLaunchpad
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.CreatedLaunchpads) == 0 {
+					m.CreatedLaunchpads = make([]uint64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowLaunchpad
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.CreatedLaunchpads = append(m.CreatedLaunchpads, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedLaunchpads", wireType)
+			}
+		case 2:
+			if wireType == 0 {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowLaunchpad
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.ActiveLaunchpads = append(m.ActiveLaunchpads, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowLaunchpad
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthLaunchpad
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthLaunchpad
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.ActiveLaunchpads) == 0 {
+					m.ActiveLaunchpads = make([]uint64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowLaunchpad
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.ActiveLaunchpads = append(m.ActiveLaunchpads, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field ActiveLaunchpads", wireType)
+			}
+		case 3:
+			if wireType == 0 {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowLaunchpad
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.SuccessLaunchpads = append(m.SuccessLaunchpads, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowLaunchpad
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthLaunchpad
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthLaunchpad
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.SuccessLaunchpads) == 0 {
+					m.SuccessLaunchpads = make([]uint64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowLaunchpad
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.SuccessLaunchpads = append(m.SuccessLaunchpads, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field SuccessLaunchpads", wireType)
+			}
+		case 4:
+			if wireType == 0 {
+				var v uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowLaunchpad
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				m.FailLaunchpads = append(m.FailLaunchpads, v)
+			} else if wireType == 2 {
+				var packedLen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowLaunchpad
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					packedLen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if packedLen < 0 {
+					return ErrInvalidLengthLaunchpad
+				}
+				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthLaunchpad
+				}
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.FailLaunchpads) == 0 {
+					m.FailLaunchpads = make([]uint64, 0, elementCount)
+				}
+				for iNdEx < postIndex {
+					var v uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowLaunchpad
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					m.FailLaunchpads = append(m.FailLaunchpads, v)
+				}
+			} else {
+				return fmt.Errorf("proto: wrong wireType = %d for field FailLaunchpads", wireType)
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipLaunchpad(dAtA[iNdEx:])

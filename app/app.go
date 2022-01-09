@@ -481,6 +481,65 @@ func (app *App) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.R
 
 // EndBlocker application updates every end block
 func (app *App) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
+	createdLaunchpads := app.LaunchpadKeeper.GetCreatedLaunchpads(ctx)
+	clps := createdLaunchpads.CreatedLaunchpads
+	var alpsids []uint64
+	for i, l := range createdLaunchpads.CreatedLaunchpads {
+		lp := app.LaunchpadKeeper.GetLaunchpad(ctx, l)
+		if lp.StartTime.After(ctx.BlockTime()) {
+			lp.Status = "ACTIVE"
+			app.LaunchpadKeeper.SetLaunchpad(ctx, lp)
+		}
+
+		clps[i] = clps[len(clps)-1]      // Copy last element to index i.
+		clps[len(clps)-1] = 0            // Erase last element (write zero value).
+		clps = clps[:len(clps)-1]        // Delete last element
+		alpsids = append(alpsids, lp.Id) // Append to active lanchpads
+	}
+
+	activeLaunchpads := app.LaunchpadKeeper.GetActiveLaunchpads(ctx)
+	alps := activeLaunchpads.ActiveLaunchpads
+
+	slps := app.LaunchpadKeeper.GetSuccessLaunchpads(ctx).SuccessLaunchpads
+	flps := app.LaunchpadKeeper.GetSuccessLaunchpads(ctx).FailLaunchpads
+
+	status := ""
+	var slpids []uint64
+	var flpids []uint64
+	for i, l := range activeLaunchpads.ActiveLaunchpads {
+		lp := app.LaunchpadKeeper.GetLaunchpad(ctx, l)
+		if lp.EndTime.After(ctx.BlockTime()) {
+			if lp.Deposits >= lp.Softcap {
+				status = "SUCCESS"
+				slpids = append(slpids, lp.Id)
+			} else {
+				status = "FAIL"
+				flpids = append(flpids, lp.Id)
+			}
+			lp.Status = status
+			app.LaunchpadKeeper.SetLaunchpad(ctx, lp)
+		}
+
+		alps[i] = alps[len(alps)-1] // Copy last element to index i.
+		alps[len(alps)-1] = 0       // Erase last element (write zero value).
+		alps = alps[:len(alps)-1]   // Delete last element
+	}
+
+	app.LaunchpadKeeper.SetCreatedLaunchpads(ctx,
+		launchpadTypes.Launchpads{CreatedLaunchpads: clps})
+
+	alps = append(alps, alpsids...)
+	app.LaunchpadKeeper.SetActiveLaunchpads(ctx,
+		launchpadTypes.Launchpads{ActiveLaunchpads: alps})
+
+	slps = append(slps, slpids...)
+	app.LaunchpadKeeper.SetSuccessLaunchpads(ctx,
+		launchpadTypes.Launchpads{SuccessLaunchpads: slps})
+
+	flps = append(flps, flpids...)
+	app.LaunchpadKeeper.SetFailLaunchpads(ctx,
+		launchpadTypes.Launchpads{FailLaunchpads: flps})
+
 	return app.mm.EndBlock(ctx, req)
 }
 

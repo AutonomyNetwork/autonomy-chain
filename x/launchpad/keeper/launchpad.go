@@ -177,3 +177,75 @@ func (k Keeper) GetDenomHolders(ctx sdk.Context, denom string) []bank.Balance {
 	}
 	return denomHolder
 }
+
+func (k Keeper) SetCreatedLaunchpads(ctx sdk.Context, launchpads types.Launchpads) {
+	store := ctx.KVStore(k.storeKey)
+
+	b := types.MustMarshalCreatedLaunchpads(k.cdc, &launchpads)
+
+	store.Set(types.GetLaunchpadCreatedKey(), b)
+}
+
+func (k Keeper) GetCreatedLaunchpads(ctx sdk.Context) (launchpads types.Launchpads) {
+	store := ctx.KVStore(k.storeKey)
+	val := store.Get(types.GetLaunchpadCreatedKey())
+	if val == nil {
+		return types.Launchpads{}
+	}
+	launchpads = types.MustUnmashalCreatedLaunchpads(k.cdc, val)
+	return launchpads
+}
+
+func (k Keeper) SetActiveLaunchpads(ctx sdk.Context, launchpads types.Launchpads) {
+	store := ctx.KVStore(k.storeKey)
+
+	b := types.MustMarshalActiveLaunchpads(k.cdc, &launchpads)
+
+	store.Set(types.GetLaunchpadActiveKey(), b)
+}
+
+func (k Keeper) GetActiveLaunchpads(ctx sdk.Context) (launchpads types.Launchpads) {
+	store := ctx.KVStore(k.storeKey)
+	val := store.Get(types.GetLaunchpadActiveKey())
+	if val == nil {
+		return types.Launchpads{}
+	}
+	launchpads = types.MustUnmashalActiveLaunchpads(k.cdc, val)
+	return launchpads
+}
+
+func (k Keeper) SetSuccessLaunchpads(ctx sdk.Context, launchpads types.Launchpads) {
+	store := ctx.KVStore(k.storeKey)
+
+	b := types.MustMarshalSuccessLaunchpads(k.cdc, &launchpads)
+
+	store.Set(types.GetLaunchpadSuccessKey(), b)
+}
+
+func (k Keeper) GetSuccessLaunchpads(ctx sdk.Context) (launchpads types.Launchpads) {
+	store := ctx.KVStore(k.storeKey)
+	val := store.Get(types.GetLaunchpadSuccessKey())
+	if val == nil {
+		return types.Launchpads{}
+	}
+	launchpads = types.MustUnmashalSuccessLaunchpads(k.cdc, val)
+	return launchpads
+}
+
+func (k Keeper) SetFailLaunchpads(ctx sdk.Context, launchpads types.Launchpads) {
+	store := ctx.KVStore(k.storeKey)
+
+	b := types.MustMarshalFailLaunchpads(k.cdc, &launchpads)
+
+	store.Set(types.GetLaunchpadFailKey(), b)
+}
+
+func (k Keeper) GetFailLaunchpads(ctx sdk.Context) (launchpads types.Launchpads) {
+	store := ctx.KVStore(k.storeKey)
+	val := store.Get(types.GetLaunchpadFailKey())
+	if val == nil {
+		return types.Launchpads{}
+	}
+	launchpads = types.MustUnmashalFailLaunchpads(k.cdc, val)
+	return launchpads
+}

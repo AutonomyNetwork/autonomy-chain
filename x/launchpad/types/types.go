@@ -61,3 +61,74 @@ func UnMarshalDepositToLaunchpad(cdc codec.BinaryCodec, value []byte) (deposit D
 	err = cdc.Unmarshal(value, &deposit)
 	return deposit, err
 }
+
+func MustMarshalCreatedLaunchpads(cdc codec.BinaryCodec, launchpads *Launchpads) []byte {
+	return cdc.MustMarshal(launchpads)
+}
+
+func MustUnmashalCreatedLaunchpads(cdc codec.BinaryCodec, value []byte) (launchpads Launchpads) {
+	laun, err := UnMarshalCreatedLaunchpads(cdc, value)
+	if err != nil {
+		panic(err)
+	}
+
+	return laun
+}
+
+func UnMarshalCreatedLaunchpads(cdc codec.BinaryCodec, value []byte) (launchpads Launchpads, err error) {
+	err = cdc.Unmarshal(value, &launchpads)
+	return launchpads, err
+}
+
+func MustMarshalActiveLaunchpads(cdc codec.BinaryCodec, launchpads *Launchpads) []byte {
+	return cdc.MustMarshal(launchpads)
+}
+
+func MustUnmashalActiveLaunchpads(cdc codec.BinaryCodec, value []byte) (launchpads Launchpads) {
+	laun, err := UnMarshalActiveLaunchpads(cdc, value)
+	if err != nil {
+		panic(err)
+	}
+
+	return laun
+}
+
+func UnMarshalActiveLaunchpads(cdc codec.BinaryCodec, value []byte) (launchpads Launchpads, err error) {
+	err = cdc.Unmarshal(value, &launchpads)
+	return launchpads, err
+}
+
+func MustMarshalSuccessLaunchpads(cdc codec.BinaryCodec, launchpads *Launchpads) []byte {
+	return cdc.MustMarshal(launchpads)
+}
+
+func MustUnmashalSuccessLaunchpads(cdc codec.BinaryCodec, value []byte) (launchpads Launchpads) {
+	laun, err := UnMarshalSuccessLaunchpads(cdc, value)
+	if err != nil {
+		panic(err)
+	}
+
+	return laun
+}
+
+func UnMarshalSuccessLaunchpads(cdc codec.BinaryCodec, value []byte) (launchpads Launchpads, err error) {
+	err = cdc.Unmarshal(value, &launchpads)
+	return launchpads, err
+}
+func MustMarshalFailLaunchpads(cdc codec.BinaryCodec, launchpads *Launchpads) []byte {
+	return cdc.MustMarshal(launchpads)
+}
+
+func MustUnmashalFailLaunchpads(cdc codec.BinaryCodec, value []byte) (launchpads Launchpads) {
+	laun, err := UnMarshalFailLaunchpads(cdc, value)
+	if err != nil {
+		panic(err)
+	}
+
+	return laun
+}
+
+func UnMarshalFailLaunchpads(cdc codec.BinaryCodec, value []byte) (launchpads Launchpads, err error) {
+	err = cdc.Unmarshal(value, &launchpads)
+	return launchpads, err
+}

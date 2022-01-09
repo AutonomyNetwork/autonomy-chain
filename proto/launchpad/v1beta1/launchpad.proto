@@ -25,10 +25,18 @@ message Launchpad {
   google.protobuf.Timestamp startTime = 7 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
   google.protobuf.Timestamp endTime = 8 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
   string status = 9; 
+  uint64 deposits =10;
+}
+
+message Launchpads{
+repeated uint64 CreatedLaunchpads = 1;
+repeated uint64 ActiveLaunchpads = 2;
+repeated uint64 SuccessLaunchpads = 3;
+repeated uint64 FailLaunchpads = 4;
 }
 
 message DepositToLaunchpad{
-   option (gogoproto.equal)           = false;
+  option (gogoproto.equal)           = false;
   option (gogoproto.goproto_getters) = false;
 
   uint64 id = 1;

@@ -59,6 +59,14 @@ func (k msgServer) CreateLaunchpad(goctx context.Context, t *types.MsgCreateLaun
 	k.SetLaunchpad(ctx, launchpad)
 	k.SetLaunchpadCount(ctx, count+1)
 
+	createdLaunchpads := k.GetCreatedLaunchpads(ctx)
+
+	launchpads := types.Launchpads{
+		CreatedLaunchpads: append(createdLaunchpads.ActiveLaunchpads, launchpad.Id),
+	}
+
+	k.SetCreatedLaunchpads(ctx, launchpads)
+
 	_ = ctx.EventManager().EmitTypedEvents(
 		&types.EventCreateLaunchpad{
 			Creator: t.Creator,
@@ -66,7 +74,6 @@ func (k msgServer) CreateLaunchpad(goctx context.Context, t *types.MsgCreateLaun
 		&types.EventModuleName)
 
 	return &types.MsgCreateLaunchpadResponse{Id: count}, nil
-
 }
 
 func (k msgServer) DepositToLaunchpad(goctx context.Context, t *types.MsgDepositToLaunchpad) (*types.MsgDepositToLaunchpadResponse, error) {
@@ -92,6 +99,9 @@ func (k msgServer) DepositToLaunchpad(goctx context.Context, t *types.MsgDeposit
 		fmt.Printf("error while subtracting balance from depoistor account")
 		return nil, sdkerrors.Wrapf(nil, "error while subtracting balance from depoistor account")
 	}
+
+	lp.Deposits = lp.Deposits + t.Amount.Amount.Uint64()
+	k.SetLaunchpad(ctx, lp)
 
 	dep := types.DepositToLaunchpad{
 		Id:        lp.Id,
