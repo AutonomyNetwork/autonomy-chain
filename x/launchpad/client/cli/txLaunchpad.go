@@ -49,7 +49,9 @@ func CmdCreateLaunchpad() *cobra.Command {
 				return err
 			}
 
-			//TODO: Need to compare times start time < end time
+			if !sTime.After(eTime) {
+				return fmt.Errorf("start time shoud be less then end time")
+			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
