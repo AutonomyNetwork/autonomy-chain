@@ -56,6 +56,8 @@ github.com/AutonomyNetwork/nft v0.0.0-20220109162900-8b2bc93e2fc4 h1:WBviSykDpyQ
 github.com/AutonomyNetwork/nft v0.0.0-20220109162900-8b2bc93e2fc4/go.mod h1:rohjoIEV6e8gu9xeMaXGUodxjaKwZoP2KPyb+R2++3k=
 github.com/AutonomyNetwork/nft v0.0.0-20220115152647-c6abdf0940a1 h1:hugees6orPQSvfnx0ypDjCEtIHP1hzBGDEVa9kuzHfU=
 github.com/AutonomyNetwork/nft v0.0.0-20220115152647-c6abdf0940a1/go.mod h1:rohjoIEV6e8gu9xeMaXGUodxjaKwZoP2KPyb+R2++3k=
+github.com/AutonomyNetwork/nft v0.0.0-20220115161455-86fe3eaec146 h1:3Y4j7Bnv+1xI25f0jM89DKYIexi84Uv3oLsJeD/oyow=
+github.com/AutonomyNetwork/nft v0.0.0-20220115161455-86fe3eaec146/go.mod h1:rohjoIEV6e8gu9xeMaXGUodxjaKwZoP2KPyb+R2++3k=
 github.com/Azure/azure-pipeline-go v0.2.1/go.mod h1:UGSo8XybXnIGZ3epmeBw7Jdz+HiUVpqIlpz/HKHylF4=
 github.com/Azure/azure-pipeline-go v0.2.2/go.mod h1:4rQ/NZncSvGqNkkOsNpOU1tgoNuIlp9AfUH5G1tvCHc=
 github.com/Azure/azure-storage-blob-go v0.7.0/go.mod h1:f9YQKtsG1nMisotuTPpO0tjNuEjKRYAcJU8/ydDI++4=
