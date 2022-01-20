@@ -23,6 +23,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/server/config"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	store "github.com/cosmos/cosmos-sdk/store/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/version"
 	"github.com/cosmos/cosmos-sdk/x/auth"
@@ -305,7 +306,10 @@ func New(
 
 	app.FeeGrantKeeper = feegrantkeeper.NewKeeper(app.appCodec, keys[feegrant.StoreKey], app.AccountKeeper)
 	app.UpgradeKeeper = upgradekeeper.NewKeeper(skipUpgradeHeights, keys[upgradetypes.StoreKey], appCodec, homePath, app.BaseApp)
-
+	app.registerUpgradeHandler();
+	
+	
+	
 	// register the staking hooks
 	// NOTE: stakingKeeper above is passed by reference, so that it will contain these hooks
 	app.StakingKeeper = *stakingKeeper.SetHooks(
@@ -434,7 +438,8 @@ func New(
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
 	app.mm.RegisterRoutes(app.Router(), app.QueryRouter(), encodingConfig.Amino)
-	app.mm.RegisterServices(module.NewConfigurator(app.appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter()))
+	app.configurator = module.NewConfigurator(app.appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter())
+	app.mm.RegisterServices(app.configurator)
 
 	// initialize stores
 	app.MountKVStores(keys)
@@ -458,7 +463,8 @@ func New(
 	}
 	app.SetAnteHandler(anteHandler)
 	app.SetEndBlocker(app.EndBlocker)
-
+	
+	
 	if loadLatest {
 		if err := app.LoadLatestVersion(); err != nil {
 			tmos.Exit(err.Error())
@@ -584,6 +590,7 @@ func (app *App) RegisterTxService(clientCtx client.Context) {
 	authtx.RegisterTxService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.BaseApp.Simulate, app.interfaceRegistry)
 }
 
+
 // RegisterTendermintService implements the Application.RegisterTendermintService method.
 func (app *App) RegisterTendermintService(clientCtx client.Context) {
 	tmservice.RegisterTendermintService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.interfaceRegistry)
@@ -616,4 +623,43 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(nftTypes.ModuleName)
 
 	return paramsKeeper
+}
+
+
+func(app *App) registerUpgradeHandler(){
+	app.UpgradeKeeper.SetUpgradeHandler("test", func(ctx sdk.Context, plan upgradetypes.Plan, _ module.VersionMap) (module.VersionMap, error) {
+		
+		fromVM := map[string]uint64{
+			"auth":         auth.AppModule{}.ConsensusVersion(),
+			"bank":         bank.AppModule{}.ConsensusVersion(),
+			"capability":   capability.AppModule{}.ConsensusVersion(),
+			"crisis":       crisis.AppModule{}.ConsensusVersion(),
+			"distribution": distr.AppModule{}.ConsensusVersion(),
+			"evidence":     evidence.AppModule{}.ConsensusVersion(),
+			"gov":          gov.AppModule{}.ConsensusVersion(),
+			"mint":         mint.AppModule{}.ConsensusVersion(),
+			"params":       params.AppModule{}.ConsensusVersion(),
+			"slashing":     slashing.AppModule{}.ConsensusVersion(),
+			"staking":      staking.AppModule{}.ConsensusVersion(),
+			"upgrade":      upgrade.AppModule{}.ConsensusVersion(),
+			"vesting":      vesting.AppModule{}.ConsensusVersion(),
+			"ibc":          ibc.AppModule{}.ConsensusVersion(),
+			"genutil":      genutil.AppModule{}.ConsensusVersion(),
+			"transfer":     transfer.AppModule{}.ConsensusVersion(),
+		}
+		return app.mm.RunMigrations(ctx, app.configurator, fromVM)
+	})
+	
+	upgradeInfo, err:= app.UpgradeKeeper.ReadUpgradeInfoFromDisk()
+	if err!=nil{
+		panic(err)
+	}
+	
+	if upgradeInfo.Name == "test" && !app.UpgradeKeeper.IsSkipHeight(upgradeInfo.Height) {
+		storeUpgrades := store.StoreUpgrades{}
+		
+		// configure store loader that checks if version == upgradeHeight and applies store upgrades
+		app.SetStoreLoader(upgradetypes.UpgradeStoreLoader(upgradeInfo.Height, &storeUpgrades))
+	}
+	
 }
