@@ -32,13 +32,16 @@ func CmdCreateLaunchpad() *cobra.Command {
 			}
 
 			startTime, _ := cmd.Flags().GetString(FlagStartTime)
-			endTime, _ := cmd.Flags().GetString(FlagHardCap)
+			endTime, _ := cmd.Flags().GetString(FlagEndTime)
 
-			// str := "2014-11-12T11:45:26.371Z"
+			str := "2014-11-12T11:45:26.371Z"
 
 			// startTime := str
 			// endTime := str
 
+			fmt.Println("srt", str)
+			fmt.Println("start time", startTime)
+			fmt.Println("end time", endTime)
 			sTime, err := time.Parse(time.RFC3339, startTime)
 			if err != nil {
 				return err
@@ -49,7 +52,7 @@ func CmdCreateLaunchpad() *cobra.Command {
 				return err
 			}
 
-			if !sTime.After(eTime) {
+			if sTime.After(eTime) {
 				return fmt.Errorf("start time shoud be less then end time")
 			}
 
@@ -69,7 +72,7 @@ func CmdCreateLaunchpad() *cobra.Command {
 	}
 
 	flags.AddTxFlagsToCmd(cmd)
-	cmd.Flags().Uint64(FlagTokenID, 0, "launchpad ending time")
+	cmd.Flags().Uint64(FlagTokenID, 0, "token id")
 	cmd.Flags().Uint64(FlagSupply, 0, "token supply adding for launchpad")
 	cmd.Flags().Uint64(FlagSoftCap, 0, "expected softcap value in number")
 	cmd.Flags().Uint64(FlagHardCap, 0, "expected hardcap value in number")
@@ -81,7 +84,7 @@ func CmdCreateLaunchpad() *cobra.Command {
 
 func CmdDepositToLaunchpad() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "deposit [id] [amount]",
+		Use:   "deposit [launchpad-id] [amount]",
 		Short: "Deposit to launchpad",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -91,7 +94,7 @@ func CmdDepositToLaunchpad() *cobra.Command {
 				return err
 			}
 
-			argsAmount, err := sdk.ParseCoinNormalized(args[2])
+			argsAmount, err := sdk.ParseCoinNormalized(args[1])
 			if err != nil {
 				return err
 			}

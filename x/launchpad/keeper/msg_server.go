@@ -62,7 +62,7 @@ func (k msgServer) CreateLaunchpad(goctx context.Context, t *types.MsgCreateLaun
 	createdLaunchpads := k.GetCreatedLaunchpads(ctx)
 
 	launchpads := types.Launchpads{
-		CreatedLaunchpads: append(createdLaunchpads.ActiveLaunchpads, launchpad.Id),
+		CreatedLaunchpads: append(createdLaunchpads.CreatedLaunchpads, launchpad.Id),
 	}
 
 	k.SetCreatedLaunchpads(ctx, launchpads)
@@ -87,16 +87,18 @@ func (k msgServer) DepositToLaunchpad(goctx context.Context, t *types.MsgDeposit
 
 	lp := k.GetLaunchpad(ctx, t.Id)
 
-	if lp.Status != "CREATED" {
+	if lp.Status != "ACTIVE" {
 		fmt.Printf("invalid launchpad status")
 		return nil, sdkerrors.Wrapf(nil, "invalid launchpad status")
 	}
 
-	err := k.bankKeeper.SendCoinsFromAccountToModule(ctx,
-		sdk.AccAddress(t.Depositor), types.ModuleName, sdk.Coins{t.Amount})
+	deptr, err := sdk.AccAddressFromBech32(t.Depositor)
+
+	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx,
+		deptr, types.ModuleName, sdk.Coins{t.Amount})
 
 	if err != nil {
-		fmt.Printf("error while subtracting balance from depoistor account")
+		fmt.Println("error while subtracting balance from depoistor account", err)
 		return nil, sdkerrors.Wrapf(nil, "error while subtracting balance from depoistor account")
 	}
 

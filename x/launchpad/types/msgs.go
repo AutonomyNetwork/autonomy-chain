@@ -77,9 +77,9 @@ func (m *MsgDepositToLaunchpad) GetSignBytes() []byte {
 }
 
 func (m *MsgDepositToLaunchpad) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(m.Depositor)
+	depositor, err := sdk.AccAddressFromBech32(m.Depositor)
 	if err != nil {
 		panic(err)
 	}
-	return []sdk.AccAddress{creator}
+	return []sdk.AccAddress{depositor}
 }

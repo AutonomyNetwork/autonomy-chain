@@ -12,7 +12,7 @@ var (
 )
 
 func GetLaunchpadKey(id uint64) []byte {
-	return append(LaunchpadCountKey, UInt64Bytes(id)...)
+	return append(LaunchpadKey, UInt64Bytes(id)...)
 }
 
 func GetDepositToLaunchpadKey(id, count uint64) []byte {
