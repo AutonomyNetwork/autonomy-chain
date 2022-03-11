@@ -35,7 +35,7 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 	tokens:= k.GetAllToken(ctx)
 	for _, token := range tokens{
 		if strings.EqualFold(denom, token.Denom){
-			return nil,  sdkerrors.Wrapf(nil,"invalid token denom: %s", t.Denom)
+			return nil,  sdkerrors.Wrapf(types.ErrDenomAlreadyExist ,"invalid token denom: %s;", t.Denom)
 		}
 	}
 	

@@ -8,5 +8,7 @@ import (
 
 // x/issuance module sentinel errors
 var (
-	ErrSample = sdkerrors.Register(ModuleName, 1100, "sample error")
+	ErrDenomAlreadyExist = sdkerrors.Register(ModuleName, 2,"Denom already exist")
+	ErrInvalidDecimals = sdkerrors.Register(ModuleName,3, "Invalid decimals")
+	ErrInvalidDenom = sdkerrors.Register(ModuleName,4,"Invalid denom")
 )
