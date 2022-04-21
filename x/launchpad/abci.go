@@ -1,6 +1,7 @@
 package launchpad
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/AutonomyNetwork/autonomy-chain/x/launchpad/keeper"
@@ -9,12 +10,15 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 )
 
-func LaunchpadEndBlock(ctx sdk.Context, k keeper.Keeper) []abci.ValidatorUpdate {
+var cont = context.Background()
+
+func LaunchpadEndBlock(ctx sdk.Context, k keeper.Keeper,
+	ak types.AccountKeeper, bk types.BankKeeper) []abci.ValidatorUpdate {
 	createdLaunchpads := k.GetCreatedLaunchpads(ctx)
 	clps := createdLaunchpads.CreatedLaunchpads
 	var clpsids []uint64
 	var alpsids []uint64
-	fmt.Println("Created launchpads............", clps)
+	fmt.Println("Created launchpads...	.........", clps)
 	for _, l := range clps {
 		fmt.Println("launchpad-id", l)
 		lp := k.GetLaunchpad(ctx, l)
@@ -61,12 +65,15 @@ func LaunchpadEndBlock(ctx sdk.Context, k keeper.Keeper) []abci.ValidatorUpdate 
 
 			lp.Status = status
 			k.SetLaunchpad(ctx, lp)
+			from := ak.GetModuleAccount(ctx, types.ModuleName)
+			CreateVestingAccount(cont, ak, bk, from.GetAddress(),
+				sdk.AccAddress(lp.Creator), sdk.NewCoin("aut", sdk.NewInt(100)))
 		} else {
 			alpsidss = append(alpsidss, lp.Id)
 		}
 	}
 
-	fmt.Println("After set Total active launchpads", alpsids)
+	fmt.Println("After set Total active launchpads", alpsidss)
 	fmt.Println("After success launchpads", slpids)
 	fmt.Println("After failed launchpads", flpids)
 

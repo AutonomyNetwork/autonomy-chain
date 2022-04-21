@@ -353,7 +353,8 @@ func New(
 	)
 
 	app.IssuanceKeeper = issuanceKeeper.NewKeeper(appCodec, keys[issuanceTypes.StoreKey], app.BankKeeper)
-	app.LaunchpadKeeper = launchpadKeeper.NewKeeper(appCodec, keys[launchpadTypes.StoreKey], app.IssuanceKeeper, app.BankKeeper)
+	app.LaunchpadKeeper = launchpadKeeper.NewKeeper(appCodec, keys[launchpadTypes.StoreKey],
+		app.IssuanceKeeper, app.AccountKeeper, app.BankKeeper)
 
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := porttypes.NewRouter()
@@ -394,7 +395,7 @@ func New(
 		transferModule,
 
 		issuance.NewAppModule(appCodec, app.IssuanceKeeper, app.BankKeeper),
-		launchpad.NewAppModule(appCodec, app.LaunchpadKeeper, app.BankKeeper),
+		launchpad.NewAppModule(appCodec, app.LaunchpadKeeper, app.AccountKeeper, app.BankKeeper),
 	)
 	// During begin block slashing happens after distr.BeginBlocker so that
 	// there is nothing left over in the validator fee pool, so as to keep the

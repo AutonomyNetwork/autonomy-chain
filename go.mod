@@ -3,6 +3,7 @@ module github.com/AutonomyNetwork/autonomy-chain
 go 1.16
 
 require (
+	github.com/armon/go-metrics v0.3.9
 	github.com/cosmos/cosmos-sdk v0.44.3
 	github.com/cosmos/ibc-go v1.2.1
 	github.com/gogo/protobuf v1.3.3
