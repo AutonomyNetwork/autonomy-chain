@@ -9,7 +9,7 @@ jobs:
   binary:
     runs-on: ubuntu-latest
     env:
-      working-directory: go/src/github.com/AutonomyNetwork/autonomy-chain/cmd/autonomy
+      working-directory: ./cmd/autonomy/
 
     steps:
       - name: Set up Go
