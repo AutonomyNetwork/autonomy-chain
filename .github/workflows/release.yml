@@ -1,6 +1,8 @@
 name: Release
 
 on:
+  branches:
+    - main
   push:
     tags:
       - "v*"
@@ -10,21 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working-directory: ./cmd/autonomy
-
     steps:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.16
+          go-version: 1.17
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.4.0
         with:
           path: ${{ env.working-directory }}
           fetch-depth: 0
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
+        uses: goreleaser/goreleaser-action@v2.8.0
         with:
           workdir: ${{ env.working-directory }}
           version: latest
