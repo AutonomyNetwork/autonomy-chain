@@ -56,7 +56,8 @@ func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
 		WithInput(os.Stdin).
 		WithAccountRetriever(types.AccountRetriever{}).
 		WithBroadcastMode(flags.BroadcastBlock).
-		WithHomeDir(app.DefaultNodeHome)
+		WithHomeDir(app.DefaultNodeHome).
+		WithViper("")
 	
 	rootCmd := &cobra.Command{
 		Use:   app.Name,
@@ -260,7 +261,7 @@ func (a appCreator) appExport(
 
 func initAppConfig() (string, interface{}) {
 	srvCfg := serverconfig.DefaultConfig()
-	srvCfg.MinGasPrices = "0atn"
+	srvCfg.MinGasPrices = "10uaut"
 	
 	return serverconfig.DefaultConfigTemplate, srvCfg
 }
