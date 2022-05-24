@@ -11,11 +11,7 @@ jobs:
   binary:
     runs-on: ubuntu-latest
     env:
-<<<<<<< HEAD
-      working-directory: ./../../cmd/autonomy/main.go
-=======
       working-directory: ./cmd/autonomy
->>>>>>> c1058389d36a111310c60c370fa952900112d707
 
     steps:
       - name: Set up Go
