@@ -65,6 +65,8 @@ github.com/AutonomyNetwork/nft v0.0.0-20220521083549-95ee383c0e5b h1:EaUhpSFHoCw
 github.com/AutonomyNetwork/nft v0.0.0-20220521083549-95ee383c0e5b/go.mod h1:JljEKdym5+NA9bHwOiTPUUtCW2+76Xd0vfKKCBLmxGE=
 github.com/AutonomyNetwork/nft v0.0.0-20220524104008-e001e675f7d6 h1:pBv7FV0ZFcdB/NJnuopM1YAzwUXn1KEoaKrD1fdUMKc=
 github.com/AutonomyNetwork/nft v0.0.0-20220524104008-e001e675f7d6/go.mod h1:3iFjrM4P7xQ3Jhu7S1ZO5zWf5APCI3IztveuaV0mWbE=
+github.com/AutonomyNetwork/nft v0.0.0-20220608083129-096e0e539d95 h1:L3iYBdyh2GFWnbQNw4KxDYzSiNaYjEvBAVaY67kmReg=
+github.com/AutonomyNetwork/nft v0.0.0-20220608083129-096e0e539d95/go.mod h1:3iFjrM4P7xQ3Jhu7S1ZO5zWf5APCI3IztveuaV0mWbE=
 github.com/Azure/azure-pipeline-go v0.2.1/go.mod h1:UGSo8XybXnIGZ3epmeBw7Jdz+HiUVpqIlpz/HKHylF4=
 github.com/Azure/azure-pipeline-go v0.2.2/go.mod h1:4rQ/NZncSvGqNkkOsNpOU1tgoNuIlp9AfUH5G1tvCHc=
 github.com/Azure/azure-sdk-for-go/sdk/azcore v0.19.0/go.mod h1:h6H6c8enJmmocHUbLiiGY6sx7f9i+X3m1CHdd5c6Rdw=
