@@ -3,6 +3,7 @@ VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
 COMMIT := $(shell git log -1 --format='%H')
 TENDERMINT_VERSION := $(shell go list -m github.com/tendermint/tendermint | sed 's:.* ::')
 MODVENDOR=modvendor
+GOBIN = $(shell go env GOPATH)/bin
 BUILD_TAGS := $(strip netgo,ledger)
 LD_FLAGS := -s -w \
     -X github.com/cosmos/cosmos-sdk/version.Name=Autonomy \
@@ -17,6 +18,9 @@ clean:
 
 install: mod-vendor
 	go install -mod=readonly -tags="${BUILD_TAGS}" -ldflags="${LD_FLAGS}" ./cmd/autonomy
+
+build:
+	go build $(BUILD_FLAGS) -o ${GOBIN} ./cmd/autonomy
 
 go-lint:
 	@golangci-lint run --fix
