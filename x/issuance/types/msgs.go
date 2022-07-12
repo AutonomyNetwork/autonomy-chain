@@ -1,7 +1,6 @@
 package types
 
 import (
-	
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
@@ -26,11 +25,22 @@ func (m *MsgIssueToken) Type() string {
 }
 
 func (m *MsgIssueToken) ValidateBasic() error {
-	// TODO: validate msg
-	if m.Decimals<1 {
+	if m.Creator == "" {
+		return ErrInvalidCreator
+	}
+	if m.Denom == "" {
+		return ErrInvalidDenom
+	}
+	if m.DisplayName == "" {
+		return ErrInvalidDisplyName
+	}
+	if m.InitialSupply < 1 {
+		return ErrInvalidInitialSupply
+	}
+	if m.Decimals < 1 {
 		return ErrInvalidDecimals
 	}
-	
+
 	return nil
 }
 

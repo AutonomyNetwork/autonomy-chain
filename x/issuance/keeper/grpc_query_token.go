@@ -52,7 +52,6 @@ func (k Keeper) Token(c context.Context, req *types.QueryGetTokenRequest) (*type
 	}
 
 	ctx := sdk.UnwrapSDKContext(c)
-
 	if !k.HasToken(ctx, req.Id) {
 		return nil, sdkerrors.ErrKeyNotFound
 	}
@@ -69,7 +68,6 @@ func (k Keeper) TokenByDenom(c context.Context, req *types.QueryTokenByDenomRequ
 	}
 
 	ctx := sdk.UnwrapSDKContext(c)
-
 	token := k.GetTokenByDenom(ctx, req.Denom)
 	token.Holders = uint64(len(k.GetDenomHolders(ctx, token.Denom)))
 	if reflect.DeepEqual(token, types.Token{}) {
@@ -100,7 +98,6 @@ func (k Keeper) TokensByOwner(c context.Context, req *types.QueryTokensByOwnerRe
 		if err != nil {
 			return err
 		}
-
 		if strings.EqualFold(token.Creator, req.Address) {
 			token.Holders = uint64(len(k.GetDenomHolders(ctx, token.Denom)))
 			tokens = append(tokens, &token)

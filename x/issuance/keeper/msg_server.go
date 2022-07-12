@@ -29,16 +29,13 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 	count := k.GetTokenCount(ctx)
 
 	denom := strings.ToLower(t.Denom)
-	
-	
-	//Check Denom Exist
-	tokens:= k.GetAllToken(ctx)
-	for _, token := range tokens{
-		if strings.EqualFold(denom, token.Denom){
-			return nil,  sdkerrors.Wrapf(types.ErrDenomAlreadyExist ,"invalid token denom: %s;", t.Denom)
+	tokens := k.GetAllToken(ctx)
+	for _, token := range tokens {
+		if strings.EqualFold(denom, token.Denom) {
+			return nil, sdkerrors.Wrapf(types.ErrDenomAlreadyExist, "invalid token denom: %s;", t.Denom)
 		}
 	}
-	
+
 	token := types.Token{
 		Creator:       t.Creator,
 		Id:            count,
@@ -77,5 +74,4 @@ func (k msgServer) IssueToken(goctx context.Context, t *types.MsgIssueToken) (*t
 		&types.EventModuleName)
 
 	return &types.MsgIssueTokenResponse{Id: count}, nil
-
 }
