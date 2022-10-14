@@ -8,3 +8,4 @@ keys.json
 buf.lock
 testnetkeys.txt
 dist/
+.vscode/

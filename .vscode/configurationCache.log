@@ -1,1 +1,0 @@
-{"buildTargets":[".PHONY","build","clean","go-lint","install","mod-vendor","modvendor","proto-gen","proto-lint","test","tools"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
