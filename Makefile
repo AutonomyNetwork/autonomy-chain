@@ -45,7 +45,7 @@ github.com/cosmos/cosmos-sdk/third_party/proto
 
 tools:
 	@go install github.com/bufbuild/buf/cmd/buf@v0.37.0
-	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.27.0
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin 
 	@go install github.com/goware/modvendor@v0.3.0
 	@go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@v1.16.0
 
