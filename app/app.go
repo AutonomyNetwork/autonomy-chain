@@ -78,7 +78,7 @@ import (
 	upgradeclient "github.com/cosmos/cosmos-sdk/x/upgrade/client"
 	upgradekeeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-	
+
 	"github.com/cosmos/ibc-go/v3/modules/apps/transfer"
 	ibctransferkeeper "github.com/cosmos/ibc-go/v3/modules/apps/transfer/keeper"
 	ibctransfertypes "github.com/cosmos/ibc-go/v3/modules/apps/transfer/types"
@@ -89,11 +89,10 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v3/modules/core/05-port/types"
 	ibchost "github.com/cosmos/ibc-go/v3/modules/core/24-host"
 	ibckeeper "github.com/cosmos/ibc-go/v3/modules/core/keeper"
-	
-	tmjson "github.com/tendermint/tendermint/libs/json"
+
 	vestingtypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
-	
-	
+	tmjson "github.com/tendermint/tendermint/libs/json"
+
 	"github.com/gravity-devs/liquidity/x/liquidity"
 	liquiditykeeper "github.com/gravity-devs/liquidity/x/liquidity/keeper"
 	liquiditytypes "github.com/gravity-devs/liquidity/x/liquidity/types"
@@ -108,6 +107,10 @@ import (
 	"github.com/AutonomyNetwork/nft"
 	nftKeeper "github.com/AutonomyNetwork/nft/keeper"
 	nftTypes "github.com/AutonomyNetwork/nft/types"
+
+	"github.com/CosmWasm/wasmd/x/wasm"
+	wasmKeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
+	wasmTypes "github.com/CosmWasm/wasmd/x/wasm/types"
 )
 
 const Name = "autonomy"
@@ -158,6 +161,7 @@ var (
 
 		issuance.AppModuleBasic{},
 		nft.AppModuleBasic{},
+		wasm.AppModuleBasic{},
 	)
 
 	// module account permissions
@@ -172,6 +176,7 @@ var (
 		issuanceTypes.ModuleName:       {authtypes.Minter, authtypes.Burner},
 		liquiditytypes.ModuleName:      {authtypes.Minter, authtypes.Burner},
 		nftTypes.ModuleName:            {authtypes.Minter, authtypes.Burner},
+		wasmTypes.ModuleName:           {authtypes.Minter, authtypes.Burner},
 	}
 )
 
@@ -230,7 +235,7 @@ type App struct {
 
 	IssuanceKeeper issuanceKeeper.Keeper
 	NFTKeeper      nftKeeper.Keeper
-
+	WasmKeeper     wasmKeeper.Keeper
 	// the module manager
 	mm *module.Manager
 
@@ -259,7 +264,7 @@ func New(
 		minttypes.StoreKey, distrtypes.StoreKey, slashingtypes.StoreKey,
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey,
-		issuanceTypes.StoreKey, authzkeeper.StoreKey, liquiditytypes.StoreKey, nftTypes.StoreKey,
+		issuanceTypes.StoreKey, authzkeeper.StoreKey, liquiditytypes.StoreKey, nftTypes.StoreKey, wasmTypes.StoreKey,
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -374,7 +379,7 @@ func New(
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := porttypes.NewRouter()
 	ibcRouter.AddRoute(ibctransfertypes.ModuleName, transferIBCModule)
-	
+
 	app.IBCKeeper.SetRouter(ibcRouter)
 
 	/****  Module Options ****/
@@ -412,6 +417,7 @@ func New(
 
 		issuance.NewAppModule(appCodec, app.IssuanceKeeper, app.BankKeeper),
 		nft.NewAppModule(appCodec, app.NFTKeeper),
+		wasm.NewAppModule(appCodec, &app.WasmKeeper, app.StakingKeeper, app.AccountKeeper, app.BankKeeper),
 	)
 	// During begin block slashing happens after distr.BeginBlocker so that
 	// there is nothing left over in the validator fee pool, so as to keep the
@@ -439,7 +445,8 @@ func New(
 		vestingtypes.ModuleName,
 		nftTypes.ModuleName,
 		issuanceTypes.ModuleName,
-		)
+		wasmTypes.ModuleName,
+	)
 
 	app.mm.SetOrderEndBlockers(
 		crisistypes.ModuleName,
@@ -463,7 +470,8 @@ func New(
 		vestingtypes.ModuleName,
 		nftTypes.ModuleName,
 		issuanceTypes.ModuleName,
-		)
+		wasmTypes.ModuleName,
+	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
 	// properly initialized with tokens from genesis accounts.
@@ -492,6 +500,7 @@ func New(
 		feegrant.ModuleName,
 		liquiditytypes.ModuleName,
 		nftTypes.ModuleName,
+		wasmTypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
