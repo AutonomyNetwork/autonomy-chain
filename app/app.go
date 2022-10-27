@@ -612,6 +612,16 @@ func (app *App) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.Res
 	if err := tmjson.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
 		panic(err)
 	}
+
+	encCfg := MakeEncodingConfig()
+	wasmGen := wasm.GenesisState{
+		Params: wasmTypes.Params{
+			CodeUploadAccess:             wasmTypes.AllowNobody,
+			InstantiateDefaultPermission: wasmTypes.AccessTypeEverybody,
+		},
+	}
+	genesisState[wasm.ModuleName] = encCfg.Marshaler.MustMarshalJSON(&wasmGen)
+
 	return app.mm.InitGenesis(ctx, app.appCodec, genesisState)
 }
 
