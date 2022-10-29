@@ -556,9 +556,10 @@ func New(
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
-	app.mm.RegisterRoutes(app.Router(), app.QueryRouter(), encodingConfig.Amino)
-	app.mm.RegisterServices(module.NewConfigurator(app.appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter()))
 	app.registerUpgradeHandler()
+	app.mm.RegisterRoutes(app.Router(), app.QueryRouter(), encodingConfig.Amino)
+	app.configurator = module.NewConfigurator(app.appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter())
+	app.mm.RegisterServices(app.configurator)
 
 	// initialize stores
 	app.MountKVStores(keys)
@@ -597,7 +598,7 @@ func New(
 
 func (app *App) registerUpgradeHandler() {
 	app.UpgradeKeeper.SetUpgradeHandler("v5.0.0.beta", func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
-		fmt.Println("============================", fromVM)
+		fmt.Println("============================ Data New", fromVM)
 		return app.mm.RunMigrations(ctx, app.configurator, fromVM)
 	})
 
