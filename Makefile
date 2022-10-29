@@ -20,7 +20,7 @@ install: mod-vendor
 	go install -mod=readonly -tags="${BUILD_TAGS}" -ldflags="${LD_FLAGS}" ./cmd/autonomy
 
 build:
-	go build $(BUILD_FLAGS) -o ${GOBIN} ./cmd/autonomy
+	go build $(BUILD_FLAGS) -o bin/autonomy ./cmd/autonomy
 
 go-lint:
 	@golangci-lint run --fix
