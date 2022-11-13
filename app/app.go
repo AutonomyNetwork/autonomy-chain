@@ -617,7 +617,7 @@ func (app *App) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.Res
 	wasmGen := wasm.GenesisState{
 		Params: wasmTypes.Params{
 			CodeUploadAccess:             wasmTypes.AllowNobody,
-			InstantiateDefaultPermission: wasmTypes.AccessTypeEverybody,
+			InstantiateDefaultPermission: wasmTypes.AccessTypeNobody,
 		},
 	}
 	genesisState[wasm.ModuleName] = encCfg.Marshaler.MustMarshalJSON(&wasmGen)
