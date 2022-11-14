@@ -62,6 +62,10 @@ github.com/99designs/keyring v1.1.6/go.mod h1:16e0ds7LGQQcT59QqkTg72Hh5ShM51Byv5
 github.com/Antonboom/errname v0.1.4/go.mod h1:jRXo3m0E0EuCnK3wbsSVH3X55Z4iTDLl6ZfCxwFj4TM=
 github.com/AutonomyNetwork/nft v0.0.0-20220627231851-090a7fdafee5 h1:1ouAR5A+WhE8aZLmFHvvgsQmxx/QfarnyQZarQXNFug=
 github.com/AutonomyNetwork/nft v0.0.0-20220627231851-090a7fdafee5/go.mod h1:3iFjrM4P7xQ3Jhu7S1ZO5zWf5APCI3IztveuaV0mWbE=
+github.com/AutonomyNetwork/nft v0.1.0 h1:JXxlbxPDS727OxKrIsSuwr+IxHEIAtipmE6htYZFMRU=
+github.com/AutonomyNetwork/nft v0.1.0/go.mod h1:jwc+66JQw6WqhwwuhJDaIZSYCj7Q16bl7aAzHcYhYF0=
+github.com/AutonomyNetwork/nft v0.1.1 h1:7bzB8I6Wt83YXwq1Nbc1QdzbVlm1wuzy4jh/YShJiJg=
+github.com/AutonomyNetwork/nft v0.1.1/go.mod h1:jwc+66JQw6WqhwwuhJDaIZSYCj7Q16bl7aAzHcYhYF0=
 github.com/Azure/azure-pipeline-go v0.2.1/go.mod h1:UGSo8XybXnIGZ3epmeBw7Jdz+HiUVpqIlpz/HKHylF4=
 github.com/Azure/azure-pipeline-go v0.2.2/go.mod h1:4rQ/NZncSvGqNkkOsNpOU1tgoNuIlp9AfUH5G1tvCHc=
 github.com/Azure/azure-sdk-for-go/sdk/azcore v0.19.0/go.mod h1:h6H6c8enJmmocHUbLiiGY6sx7f9i+X3m1CHdd5c6Rdw=
