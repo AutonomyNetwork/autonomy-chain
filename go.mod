@@ -3,7 +3,7 @@ module github.com/AutonomyNetwork/autonomy-chain
 go 1.18
 
 require (
-	github.com/AutonomyNetwork/nft v0.1.2-0.20230206094340-85f86bce3b05
+	github.com/AutonomyNetwork/nft v0.1.2-0.20230206101756-c7a645546025
 	github.com/cosmos/cosmos-sdk v0.46.3
 	github.com/cosmos/ibc-go/v5 v5.0.0
 	github.com/gogo/protobuf v1.3.3
