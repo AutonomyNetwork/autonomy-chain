@@ -72,8 +72,8 @@ filippo.io/edwards25519 v1.0.0-rc.1/go.mod h1:N1IkdkCkiLB6tki+MYJoSx2JTY9NUlxZE7
 git.sr.ht/~sircmpwn/getopt v0.0.0-20191230200459-23622cc906b3/go.mod h1:wMEGFFFNuPos7vHmWXfszqImLppbc0wEhh6JBfJIUgw=
 git.sr.ht/~sircmpwn/go-bare v0.0.0-20210406120253-ab86bc2846d9/go.mod h1:BVJwbDfVjCjoFiKrhkei6NdGcZYpkDkdyCdg1ukytRA=
 github.com/Antonboom/errname v0.1.4/go.mod h1:jRXo3m0E0EuCnK3wbsSVH3X55Z4iTDLl6ZfCxwFj4TM=
-github.com/AutonomyNetwork/nft v0.1.2-0.20230207130942-8bbb330023cb h1:ynI1PF6KTkTBU1snaPtC0dyPs4IMh8Snh6aSPQ8pyiw=
-github.com/AutonomyNetwork/nft v0.1.2-0.20230207130942-8bbb330023cb/go.mod h1:swiQWThwfUyBU6DyiPdwCTQauAujJ5Fq8W98NTsnR98=
+github.com/AutonomyNetwork/nft v0.1.2-0.20230207134311-40a0d1f99846 h1:L3ripUyw3IVLankvLghj9M0orX0IryfEo/+n2dz1seU=
+github.com/AutonomyNetwork/nft v0.1.2-0.20230207134311-40a0d1f99846/go.mod h1:swiQWThwfUyBU6DyiPdwCTQauAujJ5Fq8W98NTsnR98=
 github.com/Azure/azure-pipeline-go v0.2.1/go.mod h1:UGSo8XybXnIGZ3epmeBw7Jdz+HiUVpqIlpz/HKHylF4=
 github.com/Azure/azure-pipeline-go v0.2.2/go.mod h1:4rQ/NZncSvGqNkkOsNpOU1tgoNuIlp9AfUH5G1tvCHc=
 github.com/Azure/azure-sdk-for-go/sdk/azcore v0.21.1/go.mod h1:fBF9PQNqB8scdgpZ3ufzaLntG0AG7C1WjPMsiFOmfHM=
