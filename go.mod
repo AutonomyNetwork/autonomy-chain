@@ -3,7 +3,7 @@ module github.com/AutonomyNetwork/autonomy-chain
 go 1.18
 
 require (
-	github.com/AutonomyNetwork/nft v0.1.2-0.20230411115006-b6fba959f1c3
+	github.com/AutonomyNetwork/nft v0.1.2-0.20230528165416-c6c0eac12894
 	github.com/cosmos/cosmos-sdk v0.46.10
 	github.com/cosmos/ibc-go/v5 v5.0.0
 	github.com/gogo/protobuf v1.3.3
@@ -161,7 +161,7 @@ require (
 replace (
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.1.7-0.20210622111912-ef00f8ac3d76
 
-	// github.com/AutonomyNetwork/nft => ../../../github.com/AutonomyNetwork/nft
+	//github.com/AutonomyNetwork/nft => ../../../github.com/AutonomyNetwork/nft
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 
 	github.com/tendermint/tendermint => github.com/informalsystems/tendermint v0.34.26
